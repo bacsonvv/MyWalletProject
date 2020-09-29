@@ -17,4 +17,5 @@ struct Transaction {
     var note: String? = nil
     var eventid: String? = nil
     var budgetid: String? = nil
+    var eventname: String? = nil
 }

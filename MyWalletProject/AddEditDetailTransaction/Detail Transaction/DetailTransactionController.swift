@@ -17,6 +17,8 @@ class DetailTransactionController: UIViewController {
     @IBOutlet weak var lblCategory: UILabel!
     @IBOutlet weak var lblAmount: UILabel!
     @IBOutlet weak var lblDate: UILabel!
+    @IBOutlet weak var lblEvent: UILabel!
+    @IBOutlet weak var iconEvent: UIImageView!
     
     @IBOutlet var btnDelete: UIButton!
     @IBOutlet var lbNote: UILabel!
@@ -26,6 +28,7 @@ class DetailTransactionController: UIViewController {
     var categoryName:String = ""
     var categoryNote: String = ""
     var categoryDate:String = ""
+    var eventName: String = ""
     var type: String = ""
     var amount: Int = 0
     var icon: String = ""
@@ -38,8 +41,11 @@ class DetailTransactionController: UIViewController {
         lblDate.text = categoryDate
         lbNote.text = categoryNote
         lblCategory.text = categoryName
+        lblEvent.text = eventName
         lblAmount.text = formatter.string(from: NSNumber(value: amount))!
         iconImage.image = UIImage(named: icon)
+        iconEvent.image = UIImage(named: eventName)
+        
         formatter.groupingSeparator = "."
         formatter.numberStyle = .decimal
     }
@@ -56,6 +62,7 @@ class DetailTransactionController: UIViewController {
         amount = item.amount
         icon = item.iconImage
         dateModel = header.dateModel
+        eventName = item.eventName ?? ""
         categoryDate = "\(dateModel.weekDay), \(dateModel.date) \(dateModel.month) \(dateModel.year)"
     }
     

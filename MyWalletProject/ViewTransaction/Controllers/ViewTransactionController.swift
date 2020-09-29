@@ -196,7 +196,7 @@ class ViewTransactionController: UIViewController {
                         let amount = value["amount"] as! Int
                         let categoryid = value["categoryid"] as! String
                         let date = value["date"] as! String
-                        var transaction = Transaction(id: id, transactionType: transactionType, amount: amount, categoryid: categoryid, date: date)
+                        var transaction = Transaction(id: id, transactionType: transactionType, amount: amount, categoryid: categoryid, date: date )
                         if let note = value["note"] as? String {
                             transaction.note = note
                         }
@@ -435,7 +435,7 @@ class ViewTransactionController: UIViewController {
         dateFormatter.locale = Locale(identifier: "vi_VN")
         dateFormatter.dateFormat = "dd/MM/yyyy"
         //MARK: - Sort date string
-        let sortedArray = checkArray.sorted { (first, second) -> Bool in
+         let sortedArray = checkArray.sorted { (first, second) -> Bool in
             dateFormatter.date(from: first)?.compare(dateFormatter.date(from: second)!) == ComparisonResult.orderedDescending
         }
         return sortedArray
@@ -808,14 +808,10 @@ extension ViewTransactionController : UITableViewDelegate {
         }
         return 0
     }
-    
-    
 }
 
 extension UITextField{
-    
     func setLeftImage(imageName:String) {
-        
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         imageView.image = UIImage(named: imageName)
         self.leftView = imageView;

@@ -26,6 +26,7 @@ struct TransactionItem {
     var note: String? = nil
     var amount: Int
     var iconImage: String
+    var eventName: String? = nil 
     var type: String
 }
 

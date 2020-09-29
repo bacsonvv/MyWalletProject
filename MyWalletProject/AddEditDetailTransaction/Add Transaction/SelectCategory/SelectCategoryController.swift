@@ -38,7 +38,6 @@ class SelectCategoryController: UIViewController {
     
     func GetListCategoryExpense(){
         categories.removeAll()
-        //MyDatabase.ref = Database.database().reference().child("Category").child("expense")
         MyDatabase.ref.child("Category/expense").observe(DataEventType.value) { (snapshot) in
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshots {
@@ -50,7 +49,6 @@ class SelectCategoryController: UIViewController {
                         let type = "expense"
                         let category = Category(id: id, name: name, transactionType: type, iconImage: iconImage)
                         self.categories.append(category)
-                        
                     }
                 }
                 self.tableView.reloadData()
@@ -71,7 +69,6 @@ class SelectCategoryController: UIViewController {
                         let type = "income"
                         let category = Category(id: id, name: name, transactionType: type, iconImage: iconImage)
                         self.categories.append(category)
-                        
                     }
                 }
                 self.tableView.reloadData()
@@ -93,7 +90,7 @@ extension SelectCategoryController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = UIStoryboard.init(name: "Bac", bundle: nil).instantiateViewController(withIdentifier: "add") as? AddTransactionController
+        let vc = UIStoryboard.init(name: Constant.detailsTransaction, bundle: nil).instantiateViewController(withIdentifier: "add") as? AddTransactionController
         let ex = categories[indexPath.row]
         vc?.nameCategory = ex.name ?? ""
         vc?.iconImages = ex.iconImage ?? ""
@@ -101,7 +98,5 @@ extension SelectCategoryController: UITableViewDataSource, UITableViewDelegate{
         self.navigationController?.popViewController(animated: true)
         
     }
-    
-    
     
 }
