@@ -11,7 +11,7 @@ import FirebaseDatabase
 
 class EventController: UIViewController, UITableViewDataSource, UITableViewDelegate{
    
-    
+
     
     @IBOutlet weak var EventTable: UITableView!
     var ref : DatabaseReference!
@@ -30,6 +30,7 @@ class EventController: UIViewController, UITableViewDataSource, UITableViewDeleg
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: .add, style: .done, target: self, action: #selector(leftAction))
         ref = Database.database().reference()
         dateThis = setDate()
+       
         let nib = UINib(nibName: "EventCell", bundle: nil)
         EventTable.register(nib, forCellReuseIdentifier: "EventCell")
         EventTable.delegate = self
@@ -70,12 +71,12 @@ class EventController: UIViewController, UITableViewDataSource, UITableViewDeleg
                              let dateEnd = dict["dateEnd"] as! String
                               var check = self.checkDay(dayThis: self.dateThis, dateEnd: dateEnd)
                               if check {
-                                  let img = dict["category"] as! String
+                                  let img = dict["categoryid"] as! String
                                           let nameEvent = dict["name"] as! String
                                          let dateStars = dict["dateStart"] as! String
-                                         let money = dict["spent"] as! Int
-                                     
-                                         let event1 = Event(name: nameEvent, goal: money, dateStart: dateStars, dateEnd: dateEnd, category: img)
+                                         let money = dict["goal"] as! Int
+                                         let spent = dict["spent"] as! Int
+                                let event1 = Event(name: nameEvent, goal: money, dateStart: dateStars, dateEnd: dateEnd, categoryid: img, spent: spent)
                                 self.arrNameEvent.append(nameEvent)
                                   self.arrEvent.append(event1)
                               }
@@ -100,12 +101,24 @@ class EventController: UIViewController, UITableViewDataSource, UITableViewDeleg
        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
            100
        }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detail = UIStoryboard.init(name: "AddEvent", bundle: nil).instantiateViewController(identifier: "DetailEvent")
+        as! TableDetailEventController
+        detail.event = arrEvent[indexPath.row]
+        
+        self.navigationController?.pushViewController(detail, animated: true)
+       
+    }
+    
+    
+    
+    
     @objc func leftAction() {
         let add = UIStoryboard.init(name: "AddEvent", bundle: nil).instantiateViewController(identifier: "AddEvent") as! AddEventController
                //calendar.dateThis = dayThis
         add.arrayNameEvent = arrNameEvent
         arrEvent.removeAll()
-               self.navigationController?.pushViewController(add, animated: true)
+        self.navigationController?.pushViewController(add, animated: true)
         
         
     }
@@ -131,9 +144,9 @@ class EventController: UIViewController, UITableViewDataSource, UITableViewDeleg
                                     let nameEvent = dict["name"] as! String
                                    
                                    let dateStars = dict["dateStart"] as! String
-                                   let money = dict["spent"] as! Int
-                               
-                                   let event1 = Event(name: nameEvent, goal: money, dateStart: dateStars, dateEnd: dateEnd, category: img)
+                                   let money = dict["goal"] as! Int
+                                   let spent = dict["spent"] as! Int
+                                   let event1 = Event(name: nameEvent, goal: money, dateStart: dateStars, dateEnd: dateEnd, categoryid: img, spent: spent)
                             self.arrEvent.append(event1)
                         }
                         else {
@@ -155,11 +168,9 @@ class EventController: UIViewController, UITableViewDataSource, UITableViewDeleg
            fatalError("Date Format does not match ⚠️")
        }
 
-        if startDate1 <= endDate2 {
-            print(checkday1)
+        if startDate1 <= endDate2 {            
            checkday1 = true
        } else if startDate1 > endDate2 {
-            print(checkday1)
             checkday1 = false
        }
         return checkday1
@@ -167,6 +178,7 @@ class EventController: UIViewController, UITableViewDataSource, UITableViewDeleg
 }
 
 }
+
 
 
 

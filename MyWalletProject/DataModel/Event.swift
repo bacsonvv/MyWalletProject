@@ -13,5 +13,6 @@ struct Event {
     var goal: Int? = nil
     var dateStart: String? = nil
     var dateEnd: String? = nil
-    var category: String? = nil
+    var categoryid: String? = nil
+    var spent: Int? = nil
 }

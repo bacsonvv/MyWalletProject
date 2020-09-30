@@ -36,6 +36,8 @@
 		8ACA625F251A079C0031E6DF /* MyWalletProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACA625E251A079C0031E6DF /* MyWalletProjectTests.swift */; };
 		8ACA626A251A079C0031E6DF /* MyWalletProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACA6269251A079C0031E6DF /* MyWalletProjectUITests.swift */; };
 		AC048E2604F8BFFFBECA11F0 /* Pods_MyWalletProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1BE2AE340B9107ED17B8534 /* Pods_MyWalletProject.framework */; };
+		D2467A9A25231B4E00295D4C /* TableDetailEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2467A9925231B4E00295D4C /* TableDetailEventController.swift */; };
+		D25683972521C54A00218E0D /* AddEventTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25683962521C54A00218E0D /* AddEventTableController.swift */; };
 		D270F4B0251B52E700CB274C /* AddEvent.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D270F4AF251B52E700CB274C /* AddEvent.storyboard */; };
 		D270F4B3251B53F100CB274C /* EventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270F4B2251B53F100CB274C /* EventController.swift */; };
 		D270F4B5251B541000CB274C /* AddEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D270F4B4251B541000CB274C /* AddEventController.swift */; };
@@ -103,6 +105,8 @@
 		8ACA6265251A079C0031E6DF /* MyWalletProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyWalletProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ACA6269251A079C0031E6DF /* MyWalletProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWalletProjectUITests.swift; sourceTree = "<group>"; };
 		8ACA626B251A079C0031E6DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2467A9925231B4E00295D4C /* TableDetailEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDetailEventController.swift; sourceTree = "<group>"; };
+		D25683962521C54A00218E0D /* AddEventTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventTableController.swift; sourceTree = "<group>"; };
 		D270F4AF251B52E700CB274C /* AddEvent.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddEvent.storyboard; sourceTree = "<group>"; };
 		D270F4B2251B53F100CB274C /* EventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventController.swift; sourceTree = "<group>"; };
 		D270F4B4251B541000CB274C /* AddEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventController.swift; sourceTree = "<group>"; };
@@ -294,6 +298,8 @@
 				D270F4B6251B542900CB274C /* EventDetailController.swift */,
 				D270F4B8251B545600CB274C /* CategoryEvent.swift */,
 				D270F4C3251B557D00CB274C /* CalendarController.swift */,
+				D25683962521C54A00218E0D /* AddEventTableController.swift */,
+				D2467A9925231B4E00295D4C /* TableDetailEventController.swift */,
 			);
 			path = EventController;
 			sourceTree = "<group>";
@@ -522,6 +528,7 @@
 				8A3BB426251AFE7C008113E9 /* SettingsItemViewCell.swift in Sources */,
 				8A3BB40D251ADE9E008113E9 /* Category.swift in Sources */,
 				8A3BB418251ADF9E008113E9 /* ScanBillViewController.swift in Sources */,
+				D25683972521C54A00218E0D /* AddEventTableController.swift in Sources */,
 				D270F4C4251B557D00CB274C /* CalendarController.swift in Sources */,
 				8A3BB421251AF91F008113E9 /* UserSettingsViewController.swift in Sources */,
 				D270F4B9251B545600CB274C /* CategoryEvent.swift in Sources */,
@@ -534,6 +541,7 @@
 				8A3BB434251B6069008113E9 /* CurrencyViewController.swift in Sources */,
 				8A3BB431251B326E008113E9 /* SettingsUseCase.swift in Sources */,
 				8ACA624A251A07980031E6DF /* SceneDelegate.swift in Sources */,
+				D2467A9A25231B4E00295D4C /* TableDetailEventController.swift in Sources */,
 				8A1E077A251C3DB3000DCF07 /* CurrencyPresenter.swift in Sources */,
 				D270F4BD251B54DF00CB274C /* EventCell.swift in Sources */,
 				D270F4B5251B541000CB274C /* AddEventController.swift in Sources */,
