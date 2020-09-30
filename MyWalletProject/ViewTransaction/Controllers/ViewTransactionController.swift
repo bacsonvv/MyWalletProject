@@ -716,7 +716,7 @@ extension ViewTransactionController : UITableViewDataSource {
         case transactionTableView:
             if indexPath.section != 0 {
                 print("Section: \(indexPath.section), row: \(indexPath.row)")
-                let vc = UIStoryboard.init(name: "ViewTransaction", bundle: nil).instantiateViewController(withIdentifier: "detail") as? DetailTransactionController
+                let vc = UIStoryboard.init(name: "DetailTransaction", bundle: nil).instantiateViewController(withIdentifier: "detail") as? DetailTransactionController
                 vc?.setUpDataTransactionView(item: transactionSections[indexPath.section - 1].items[indexPath.row], header: transactionSections[indexPath.section - 1].header)
                 self.navigationController?.pushViewController(vc!, animated: true)
                 tableView.deselectRow(at: indexPath, animated: true)

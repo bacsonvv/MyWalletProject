@@ -10,6 +10,7 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 
+
 class AddTransactionController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var tfDate: UITextField!
