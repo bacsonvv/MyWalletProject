@@ -17,6 +17,11 @@ enum RouterType {
     case planning
     case budget
     case event
+    case tabbar
+    case viewTransaction
+    case report
+    case account
+    case planningNavi
     
     //case viewTransaction
 }
@@ -53,10 +58,9 @@ class AppRouter {
 extension RouterType{
     func getVc() -> UIViewController {
         switch self {
-        case .transactionDetail(let item, let header ):
+        case .transactionDetail(let item, let header):
             let vc = UIStoryboard(name: "ViewTransaction", bundle: nil).instantiateViewController(withIdentifier: "detail") as! DetailTransactionController
             vc.setUpDataTransactionView(item: item, header: header)
-            
             return vc
         case .categoryDetail(let item, let header):
             let vc = UIStoryboard(name: "ViewTransaction", bundle: nil).instantiateViewController(withIdentifier: "detail") as! DetailTransactionController
@@ -77,13 +81,23 @@ extension RouterType{
         case .event:
             let vc = UIStoryboard(name: "AddEvent", bundle: nil).instantiateViewController(withIdentifier: "EventController") as! EventController
             return vc
-            
-            //        default:
-            //            let vc = UIStoryboard(name: "ViewTransaction", bundle: nil).instantiateViewController(withIdentifier: "ViewTransactionController") as! ViewTransactionViewController
-            //            let presenter = ViewTransactionPresenter(delegate: vc, viewTransUseCase: ViewTransactionUseCase())
-            //            vc.setUp(presenter: presenter)
-            //            return vc
-            
+        case .tabbar:
+            let vc = MainTabViewController.createTabbar()
+            return vc
+        case .viewTransaction:
+            let vc = UIStoryboard(name: "ViewTransaction", bundle: nil).instantiateViewController(withIdentifier: "transaction_vc") as! ViewTransactionViewController
+            let presenter = ViewTransactionPresenter(delegate: vc, usecase: ViewTransactionUseCase())
+            vc.setUp(presenter: presenter)
+            return vc
+        case .account:
+             let vc = UIStoryboard(name: "UserSettings", bundle: nil).instantiateViewController(withIdentifier: "userSettingsNav") as! UINavigationController
+            return vc
+        case .report:
+             let vc = UIStoryboard(name: "Report", bundle: nil).instantiateViewController(withIdentifier: "ReportViewController") as! ReportViewController
+            return vc
+        case .planningNavi:
+            let vc = UIStoryboard(name: "ViewTransaction", bundle: nil).instantiateViewController(withIdentifier: "navi_second") as! SecondNavigationController
+            return vc
         }
     }
 }

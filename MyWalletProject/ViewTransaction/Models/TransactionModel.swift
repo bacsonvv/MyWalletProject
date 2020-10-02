@@ -77,3 +77,8 @@ struct TransactionDate {
     var dateString: String
     var date: Date
 }
+
+struct DetailInfo {
+    var opening: Int
+    var ending: Int
+}

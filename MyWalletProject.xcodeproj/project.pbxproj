@@ -78,7 +78,6 @@
 		73E0B1782521E0EE0097D41F /* ViewTransaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73E0B15C2521E0ED0097D41F /* ViewTransaction.storyboard */; };
 		73E0B1792521E0EE0097D41F /* Defined.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E0B15D2521E0ED0097D41F /* Defined.swift */; };
 		73E0B17A2521E0EE0097D41F /* BalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E0B15F2521E0ED0097D41F /* BalanceViewController.swift */; };
-		73E0B17B2521E0EE0097D41F /* ViewTransactionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E0B1602521E0ED0097D41F /* ViewTransactionController.swift */; };
 		73E0B17C2521E0EE0097D41F /* FirstNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E0B1612521E0ED0097D41F /* FirstNavigationController.swift */; };
 		73E0B17D2521E0EE0097D41F /* TransactionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73E0B1642521E0ED0097D41F /* TransactionCell.xib */; };
 		73E0B17E2521E0EE0097D41F /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E0B1652521E0ED0097D41F /* TransactionCell.swift */; };
@@ -100,6 +99,9 @@
 		73E78DA62524422700D7B962 /* SelectEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E78DA52524422700D7B962 /* SelectEventController.swift */; };
 		73E78DAA2524427B00D7B962 /* SelectEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E78DA82524427B00D7B962 /* SelectEventCell.swift */; };
 		73E78DAB2524427B00D7B962 /* SelectEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73E78DA92524427B00D7B962 /* SelectEventCell.xib */; };
+		73F40CD1252756430092875A /* ViewTransactionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F40CCE252756430092875A /* ViewTransactionPresenter.swift */; };
+		73F40CD2252756430092875A /* ViewTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F40CCF252756430092875A /* ViewTransactionViewController.swift */; };
+		73F40CD3252756430092875A /* ViewTransactionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F40CD0252756430092875A /* ViewTransactionUseCase.swift */; };
 		8A1E077A251C3DB3000DCF07 /* CurrencyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1E0779251C3DB3000DCF07 /* CurrencyPresenter.swift */; };
 		8A1E077C251C4175000DCF07 /* CurrencyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1E077B251C4175000DCF07 /* CurrencyUseCase.swift */; };
 		8A3BB40B251ADE6E008113E9 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3BB40A251ADE6E008113E9 /* Transaction.swift */; };
@@ -238,7 +240,6 @@
 		73E0B15C2521E0ED0097D41F /* ViewTransaction.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ViewTransaction.storyboard; sourceTree = "<group>"; };
 		73E0B15D2521E0ED0097D41F /* Defined.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Defined.swift; sourceTree = "<group>"; };
 		73E0B15F2521E0ED0097D41F /* BalanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceViewController.swift; sourceTree = "<group>"; };
-		73E0B1602521E0ED0097D41F /* ViewTransactionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTransactionController.swift; sourceTree = "<group>"; };
 		73E0B1612521E0ED0097D41F /* FirstNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstNavigationController.swift; sourceTree = "<group>"; };
 		73E0B1642521E0ED0097D41F /* TransactionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionCell.xib; sourceTree = "<group>"; };
 		73E0B1652521E0ED0097D41F /* TransactionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
@@ -260,6 +261,9 @@
 		73E78DA52524422700D7B962 /* SelectEventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectEventController.swift; sourceTree = "<group>"; };
 		73E78DA82524427B00D7B962 /* SelectEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectEventCell.swift; sourceTree = "<group>"; };
 		73E78DA92524427B00D7B962 /* SelectEventCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectEventCell.xib; sourceTree = "<group>"; };
+		73F40CCE252756430092875A /* ViewTransactionPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTransactionPresenter.swift; sourceTree = "<group>"; };
+		73F40CCF252756430092875A /* ViewTransactionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTransactionViewController.swift; sourceTree = "<group>"; };
+		73F40CD0252756430092875A /* ViewTransactionUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTransactionUseCase.swift; sourceTree = "<group>"; };
 		8A1E0779251C3DB3000DCF07 /* CurrencyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPresenter.swift; sourceTree = "<group>"; };
 		8A1E077B251C4175000DCF07 /* CurrencyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyUseCase.swift; sourceTree = "<group>"; };
 		8A3BB40A251ADE6E008113E9 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -708,7 +712,9 @@
 		73E0B18F2521ED680097D41F /* MainTransaction */ = {
 			isa = PBXGroup;
 			children = (
-				73E0B1602521E0ED0097D41F /* ViewTransactionController.swift */,
+				73F40CCE252756430092875A /* ViewTransactionPresenter.swift */,
+				73F40CD0252756430092875A /* ViewTransactionUseCase.swift */,
+				73F40CCF252756430092875A /* ViewTransactionViewController.swift */,
 			);
 			path = MainTransaction;
 			sourceTree = "<group>";
@@ -1185,7 +1191,6 @@
 				73E0B1832521E0EE0097D41F /* TransactionDayCell.swift in Sources */,
 				56B8A80A25248A7700B8E8F0 /* TimeCell.swift in Sources */,
 				8A3BB426251AFE7C008113E9 /* SettingsItemViewCell.swift in Sources */,
-				73E0B17B2521E0EE0097D41F /* ViewTransactionController.swift in Sources */,
 				8A3BB40D251ADE9E008113E9 /* Category.swift in Sources */,
 				72873D8B25249AFC00313629 /* DetailSBCTableViewCell.swift in Sources */,
 				8A3BB418251ADF9E008113E9 /* ScanBillViewController.swift in Sources */,
@@ -1227,6 +1232,7 @@
 				8A3BB431251B326E008113E9 /* SettingsUseCase.swift in Sources */,
 				7338862D25231F68002F126B /* EditTransactionController.swift in Sources */,
 				56B8A81B25248CAE00B8E8F0 /* CalendarViewController.swift in Sources */,
+				73F40CD1252756430092875A /* ViewTransactionPresenter.swift in Sources */,
 				72873D8F25249B2700313629 /* DayDetail.swift in Sources */,
 				7338862625231F68002F126B /* CustomDateController.swift in Sources */,
 				8A1E077A251C3DB3000DCF07 /* CurrencyPresenter.swift in Sources */,
@@ -1235,6 +1241,7 @@
 				72873D9B25249C0800313629 /* DetailPieTableViewCell.swift in Sources */,
 				56B8A7F02524849300B8E8F0 /* LoginPresenterFB.swift in Sources */,
 				7338862825231F68002F126B /* SelectCategoryCell.swift in Sources */,
+				73F40CD3252756430092875A /* ViewTransactionUseCase.swift in Sources */,
 				73E0B1892521E0EE0097D41F /* BaseTBCell.swift in Sources */,
 				72873D8025249A6500313629 /* DayDetailPC.swift in Sources */,
 				73E0B17A2521E0EE0097D41F /* BalanceViewController.swift in Sources */,
@@ -1242,6 +1249,7 @@
 				73E0B1792521E0EE0097D41F /* Defined.swift in Sources */,
 				72873D8725249ACB00313629 /* DayStackedBarChartTableViewCell.swift in Sources */,
 				72873DA325249C5600313629 /* DayDetailCell.swift in Sources */,
+				73F40CD2252756430092875A /* ViewTransactionViewController.swift in Sources */,
 				735873EE2521780D00B8235D /* MainTabbar.swift in Sources */,
 				D270F4BD251B54DF00CB274C /* EventCell.swift in Sources */,
 				72A7191A251DDE87003ED157 /* StackedBarChartTableViewCell.swift in Sources */,
