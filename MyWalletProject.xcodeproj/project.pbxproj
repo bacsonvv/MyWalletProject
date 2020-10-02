@@ -102,6 +102,9 @@
 		73E78DAA2524427B00D7B962 /* SelectEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E78DA82524427B00D7B962 /* SelectEventCell.swift */; };
 		73E78DAB2524427B00D7B962 /* SelectEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73E78DA92524427B00D7B962 /* SelectEventCell.xib */; };
 		73E78DAD252442FD00D7B962 /* SelectEventUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E78DAC252442FD00D7B962 /* SelectEventUseCase.swift */; };
+		73F40CC92526BC060092875A /* ViewTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F40CC82526BC060092875A /* ViewTransactionViewController.swift */; };
+		73F40CCB2526BC190092875A /* ViewTransactionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F40CCA2526BC190092875A /* ViewTransactionUseCase.swift */; };
+		73F40CCD2526BC240092875A /* ViewTransactionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F40CCC2526BC240092875A /* ViewTransactionPresenter.swift */; };
 		73FC0D342525DE4C0012676D /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC0D332525DE4C0012676D /* TransactionViewController.swift */; };
 		73FC0D362525DE5E0012676D /* TransactionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC0D352525DE5E0012676D /* TransactionUseCase.swift */; };
 		73FC0D382525DE6C0012676D /* TransactionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FC0D372525DE6C0012676D /* TransactionPresenter.swift */; };
@@ -263,6 +266,9 @@
 		73E78DA82524427B00D7B962 /* SelectEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectEventCell.swift; sourceTree = "<group>"; };
 		73E78DA92524427B00D7B962 /* SelectEventCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectEventCell.xib; sourceTree = "<group>"; };
 		73E78DAC252442FD00D7B962 /* SelectEventUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectEventUseCase.swift; sourceTree = "<group>"; };
+		73F40CC82526BC060092875A /* ViewTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTransactionViewController.swift; sourceTree = "<group>"; };
+		73F40CCA2526BC190092875A /* ViewTransactionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTransactionUseCase.swift; sourceTree = "<group>"; };
+		73F40CCC2526BC240092875A /* ViewTransactionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTransactionPresenter.swift; sourceTree = "<group>"; };
 		73FC0D332525DE4C0012676D /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		73FC0D352525DE5E0012676D /* TransactionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionUseCase.swift; sourceTree = "<group>"; };
 		73FC0D372525DE6C0012676D /* TransactionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionPresenter.swift; sourceTree = "<group>"; };
@@ -594,7 +600,6 @@
 			isa = PBXGroup;
 			children = (
 				73E0B15B2521E0ED0097D41F /* TransactionModel.swift */,
-				73E0B15D2521E0ED0097D41F /* Defined.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -630,7 +635,6 @@
 			isa = PBXGroup;
 			children = (
 				7338863B25232A77002F126B /* Models */,
-				73E0B1A7252206180097D41F /* Router */,
 				73E0B15C2521E0ED0097D41F /* ViewTransaction.storyboard */,
 				73E0B15E2521E0ED0097D41F /* Controllers */,
 				73E0B1622521E0ED0097D41F /* Views */,
@@ -641,6 +645,7 @@
 		73E0B15E2521E0ED0097D41F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				73E0B1602521E0ED0097D41F /* ViewTransactionController.swift */,
 				73FC0D322525DE240012676D /* TestViewController */,
 				73AA67F42525825E001EAA1D /* Planning */,
 				73E0B1902521ED6F0097D41F /* Balance */,
@@ -709,7 +714,9 @@
 		73E0B18F2521ED680097D41F /* MainTransaction */ = {
 			isa = PBXGroup;
 			children = (
-				73E0B1602521E0ED0097D41F /* ViewTransactionController.swift */,
+				73F40CC82526BC060092875A /* ViewTransactionViewController.swift */,
+				73F40CCA2526BC190092875A /* ViewTransactionUseCase.swift */,
+				73F40CCC2526BC240092875A /* ViewTransactionPresenter.swift */,
 			);
 			path = MainTransaction;
 			sourceTree = "<group>";
@@ -720,14 +727,6 @@
 				73E0B15F2521E0ED0097D41F /* BalanceViewController.swift */,
 			);
 			path = Balance;
-			sourceTree = "<group>";
-		};
-		73E0B1A7252206180097D41F /* Router */ = {
-			isa = PBXGroup;
-			children = (
-				73E0B1A8252206200097D41F /* AppRouter.swift */,
-			);
-			path = Router;
 			sourceTree = "<group>";
 		};
 		73E78DA2252441CC00D7B962 /* SelectEvent2 */ = {
@@ -817,6 +816,8 @@
 		8AB19A0C2524400D0074C8F0 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				73E0B15D2521E0ED0097D41F /* Defined.swift */,
+				73E0B1A8252206200097D41F /* AppRouter.swift */,
 				7338860325231F67002F126B /* Constant.swift */,
 			);
 			path = Helpers;
@@ -856,7 +857,6 @@
 				735873EB252177FA00B8235D /* Tabbar */,
 				8A3BB41D251AE6D9008113E9 /* UserSettings */,
 				D270F4AE251B52A700CB274C /* AddEvent */,
-				72A7190D251DDD08003ED157 /* Report */,
 				8ACA6247251A07980031E6DF /* AppDelegate.swift */,
 				8ACA624B251A07980031E6DF /* ViewController.swift */,
 				8ACA624D251A07980031E6DF /* Main.storyboard */,
@@ -910,6 +910,7 @@
 		D270F4AE251B52A700CB274C /* AddEvent */ = {
 			isa = PBXGroup;
 			children = (
+				72A7190D251DDD08003ED157 /* Report */,
 				D270F4BA251B547100CB274C /* EventCell */,
 				D270F4B1251B53A500CB274C /* EventController */,
 				D270F4AF251B52E700CB274C /* AddEvent.storyboard */,
@@ -1241,6 +1242,7 @@
 				56B8A81B25248CAE00B8E8F0 /* CalendarViewController.swift in Sources */,
 				72873D8F25249B2700313629 /* DayDetail.swift in Sources */,
 				7338862625231F68002F126B /* CustomDateController.swift in Sources */,
+				73F40CCD2526BC240092875A /* ViewTransactionPresenter.swift in Sources */,
 				8A1E077A251C3DB3000DCF07 /* CurrencyPresenter.swift in Sources */,
 				73E0B1882521E0EE0097D41F /* BottomMenuCell.swift in Sources */,
 				73E78DA62524422700D7B962 /* SelectEventController.swift in Sources */,
@@ -1259,9 +1261,11 @@
 				72A7191A251DDE87003ED157 /* StackedBarChartTableViewCell.swift in Sources */,
 				72A71923251DDEEE003ED157 /* PieChartCollectionViewCell.swift in Sources */,
 				73FC0D382525DE6C0012676D /* TransactionPresenter.swift in Sources */,
+				73F40CC92526BC060092875A /* ViewTransactionViewController.swift in Sources */,
 				735873EF2521780D00B8235D /* MainTabViewController.swift in Sources */,
 				73AA67FA25258294001EAA1D /* PlanningCell.swift in Sources */,
 				73E0B17E2521E0EE0097D41F /* TransactionCell.swift in Sources */,
+				73F40CCB2526BC190092875A /* ViewTransactionUseCase.swift in Sources */,
 				7338862E25231F68002F126B /* DetailTransactionController.swift in Sources */,
 				D270F4B5251B541000CB274C /* AddEventController.swift in Sources */,
 				D270F4B7251B542900CB274C /* EventDetailController.swift in Sources */,

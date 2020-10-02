@@ -757,15 +757,15 @@ extension ViewTransactionController : UITableViewDelegate {
 
 
 }
-extension UITextField {
-    func setRightImage(imageName: String) {
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-                imageView.image = UIImage(named: imageName)
-                imageView.contentMode = .scaleToFill
-                self.rightView = imageView;
-                self.rightViewMode = .always
-    }
-}
+//extension UITextField {
+//    func setRightImage(imageName: String) {
+//        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+//                imageView.image = UIImage(named: imageName)
+//                imageView.contentMode = .scaleToFill
+//                self.rightView = imageView;
+//                self.rightViewMode = .always
+//    }
+//}
 //MARK: MENU CELL
 extension ViewTransactionController : UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

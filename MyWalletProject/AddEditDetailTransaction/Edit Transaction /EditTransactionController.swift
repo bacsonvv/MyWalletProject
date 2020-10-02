@@ -60,9 +60,9 @@ class EditTransactionController: UIViewController, UITextFieldDelegate {
     }
     
     func customizeLayout(){
-        txtCategory.setRightImage(imageName: "arrowright")
-        tfEvent.setRightImage(imageName: "arrowright")
-        txtDate.setRightImage(imageName: "arrowright")
+        txtCategory.setRightImage2(imageName: "arrowright")
+        tfEvent.setRightImage2(imageName: "arrowright")
+        txtDate.setRightImage2(imageName: "arrowright")
     }
     
     func configure(){

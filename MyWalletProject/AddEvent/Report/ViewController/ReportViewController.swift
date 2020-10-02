@@ -42,12 +42,12 @@ class ReportViewController: UIViewController {
         createDatePicker()
     }
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+//        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         super.viewWillAppear(animated)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+//        self.navigationController?.setNavigationBarHidden(false, animated: animated)
         super.viewWillDisappear(animated)
     }
     
@@ -63,7 +63,7 @@ class ReportViewController: UIViewController {
         } else {
             txtDatePicker.text = "\(currentMonth)/\(currentYear)"
         }
-        txtDatePicker.setRightImage(imageName: "down")
+        txtDatePicker.setRightImage2(imageName: "down")
     }
     
     func showDatePicker() {
