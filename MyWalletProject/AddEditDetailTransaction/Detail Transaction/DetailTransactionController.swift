@@ -34,7 +34,6 @@ class DetailTransactionController: UIViewController {
     var icon: String = ""
     var dateModel: DateModel!
      
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.3929189782, green: 0.4198221317, blue: 0.8705882353, alpha: 1)
@@ -46,7 +45,6 @@ class DetailTransactionController: UIViewController {
         lblAmount.text = formatter.string(from: NSNumber(value: amount))!
         iconImage.image = UIImage(named: icon)
         iconEvent.image = UIImage(named: eventName)
-        
         formatter.groupingSeparator = "."
         formatter.numberStyle = .decimal
     }
@@ -62,8 +60,9 @@ class DetailTransactionController: UIViewController {
         categoryNote = item.note ?? ""
         amount = item.amount
         icon = item.iconImage
+        eventName = item.eventid ?? ""
+        categoryDate = item.date ?? ""
         dateModel = header.dateModel
-        //eventName = item.ev
         categoryDate = "\(dateModel.weekDay), \(dateModel.date) \(dateModel.month) \(dateModel.year)"
     }
     
@@ -78,10 +77,11 @@ class DetailTransactionController: UIViewController {
         categoryDate = "\(dateModel.weekDay), \(dateModel.date) \(dateModel.month) \(dateModel.year)"
     }
     
+   
+    
     @IBAction func btnEditTransaction(_ sender: Any) {
         let vc = UIStoryboard.init(name: "ViewTransaction", bundle: nil).instantiateViewController(withIdentifier: "edit") as? EditTransactionController
         vc?.setUpData(type: type, transactionId: transactionid, name: categoryName, note: categoryNote, amount: amount, icon: icon, dateModel: dateModel)
-        
         self.navigationController?.pushViewController(vc!, animated: true)
     }
     

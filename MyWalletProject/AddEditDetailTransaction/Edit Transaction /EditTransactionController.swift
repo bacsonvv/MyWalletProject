@@ -20,8 +20,10 @@ class EditTransactionController: UIViewController, UITextFieldDelegate {
     var amount: Int = 0
     var icon: String = ""
     var dateModel: DateModel!
+    var dateString:TransactionDate!
     var thisDate = Date()
     private let dateFormatter = DateFormatter()
+    
     
     @IBOutlet var btnSave: UIBarButtonItem!
     
@@ -39,6 +41,7 @@ class EditTransactionController: UIViewController, UITextFieldDelegate {
         customizeLayout()
         txtAmount.delegate = self
         addEvent()
+        setUpbtnSave()
     }
     
     // add event txtDate,txtCategory
@@ -82,22 +85,17 @@ class EditTransactionController: UIViewController, UITextFieldDelegate {
         self.icon = icon
         self.dateModel = dateModel
         
+        
     }
     
     @IBAction func clickCancel(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction func clickSave(_ sender: Any) {
-         if let strAmount = txtAmount.text,
-                  let intAmount = Int(strAmount){
-                  amount = intAmount
-                  if amount <= 0{
-                      let alert = UIAlertController(title: "Notification", message: "Amount of money cannot be 0", preferredStyle: .alert)
-                      alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                      self.present(alert, animated: true, completion: nil)
-                      return
-                  }
-              }
+        if let strAmount = txtAmount.text,
+            let intAmount = Int(strAmount){
+            amount = intAmount
+        }
         let update = [
             "note":txtNote.text! ,
             "date":txtDate.text!,
@@ -131,6 +129,15 @@ class EditTransactionController: UIViewController, UITextFieldDelegate {
         }
         return true
     }
+    
+    func setUpbtnSave(){
+        if txtCategory.text!.isEmpty || txtDate.text!.isEmpty   {
+            btnSave.isEnabled = false
+        }else{
+            btnSave.isEnabled = true
+        }
+    }
+    
 }
 
 extension EditTransactionController: SelectCategory, SelectDate{

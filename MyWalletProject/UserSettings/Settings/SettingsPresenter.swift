@@ -20,7 +20,6 @@ enum Language: String {
 }
 
 class SettingsPresenter {
-    
     var viewDelegate: SettingsViewControllerProtocol?
     var usecase: SettingsUseCase = SettingsUseCase()
     

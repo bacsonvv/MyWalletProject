@@ -32,6 +32,7 @@ class AddTransactionController: UIViewController, UITextFieldDelegate {
     var type: String = ""
     var thisDate = Date()
     private let dateFormatter = DateFormatter()
+    
     override func viewDidLoad() {
         customizeLayout()
         viewShowMore.isHidden = true
@@ -56,20 +57,18 @@ class AddTransactionController: UIViewController, UITextFieldDelegate {
         btnAddMore.layer.borderWidth = 1
         btnAddMore.layer.borderColor = #colorLiteral(red: 0.3929189782, green: 0.4198221317, blue: 0.8705882353, alpha: 1)
         btnAddMore.layer.cornerRadius = 6
-        
         tfCategory.setRightImage(imageName: "arrowright")
         tfDate.setRightImage(imageName: "arrowright")
-        
         tfEvent.setRightImage(imageName: "arrowright")
     }
     
-    func addEvent()  {
-        tfCategory.addTarget(self, action: #selector(myEvent), for: .touchDown)
+    func addEvent(){
+        tfCategory.addTarget(self, action: #selector(myCategory), for: .touchDown)
         tfDate.addTarget(self, action: #selector(myDate), for: .touchDown)
-//        tfEvent.addTarget(self, action: #selector(myEven), for: .touchDown)
+        tfEvent.addTarget(self, action: #selector(myEvent), for: .touchDown )
     }
     
-    @objc func myEvent(textField: UITextField) {
+    @objc func myCategory(textField: UITextField) {
         let vc = UIStoryboard.init(name: Constant.detailsTransaction, bundle: nil).instantiateViewController(withIdentifier: "selectCategory") as? SelectCategoryController
         vc?.delegate = self
         self.navigationController?.pushViewController(vc!, animated: true)
@@ -85,11 +84,12 @@ class AddTransactionController: UIViewController, UITextFieldDelegate {
         self.navigationController?.pushViewController(vc!, animated: true)
         
     }
-//    @objc func myEven(textField:UITextField){
-//           let vc = UIStoryboard.init(name: Constant.detailsTransaction, bundle: nil).instantiateViewController(withIdentifier: "selectEvent") as? SelectEventController
-//           vc?.delegate = self
-//           self.navigationController?.pushViewController(vc!, animated: true)
-//       }
+    
+    @objc func myEvent(textField: UITextField) {
+        let vc = UIStoryboard.init(name: Constant.detailsTransaction, bundle: nil).instantiateViewController(withIdentifier: "selectEvent") as? SelectEventController
+        vc?.delegate = self
+        self.navigationController?.pushViewController(vc!, animated: true)
+    }
     
     
     @IBAction func clickCancel(_ sender: Any) {
@@ -123,7 +123,6 @@ class AddTransactionController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func btnAddMoreDetails(_ sender: Any) {
-        
         viewShowMore.isHidden = false
         btnAddMore.isHidden = true
     }
@@ -150,7 +149,11 @@ class AddTransactionController: UIViewController, UITextFieldDelegate {
     }
 }
 
-extension AddTransactionController: SelectCategory, SelectDate{
+extension AddTransactionController: SelectCategory, SelectDate, SelectEvent{
+    func setEvent(nameEvent: String) {
+        tfEvent.text = nameEvent
+    }
+    
     func setDate(date: String) {
         tfDate.text = date
     }

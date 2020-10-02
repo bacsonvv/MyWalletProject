@@ -31,7 +31,7 @@ class ViewTransactionController: UIViewController {
     var balance = Defined.defaults.integer(forKey: Constants.balance)
     //var balance = Defined.defaults.integer(forKey: Constants.balance)
     var dates = [TransactionDate]()
-    var months = ["01","02","03","04","05","06","07","08","09","10","11","12"]
+    var months = ["January","February","March","April","May","June","July","August","September","October","November",""]
     var weekdays = ["Sunday","Monday","Tuesday","Wednesday","Thurday","Friday","Saturday"]
 
     var transactionBotMenu = [
@@ -81,7 +81,7 @@ class ViewTransactionController: UIViewController {
     @IBOutlet var centerLabel: UILabel!
     @IBOutlet var centerIcon: UIImageView!
     @IBOutlet var noTransaction: UIStackView!
-    
+
     @IBOutlet var lbBalance: UILabel!
 
     override func viewDidLoad() {
@@ -218,12 +218,16 @@ class ViewTransactionController: UIViewController {
                         let amount = value["amount"] as! Int
                         let categoryid = value["categoryid"] as! String
                         let date = value["date"] as! String
-                        var transaction = Transaction(id: id, transactionType: transactionType, amount: amount, categoryid: categoryid, date: date)
+                        let event = value["eventid"] as! String
+                        var transaction = Transaction(id: id, transactionType: transactionType, amount: amount, categoryid: categoryid, date: date, eventid: event)
+                        print(event)
                         if let note = value["note"] as? String {
                             transaction.note = note
+                            print(date)
                         }
                         if let eventid = value["eventid"] as? String {
                             transaction.eventid = eventid
+                            
                         }
                         if let budgetid = value["budgetid"] as? String {
                             transaction.budgetid = budgetid
@@ -249,6 +253,7 @@ class ViewTransactionController: UIViewController {
                         let categoryid = value["categoryid"] as! String
                         let date = value["date"] as! String
                         var transaction = Transaction(id: id, transactionType: transactionType, amount: amount, categoryid: categoryid, date: date)
+                        
                         if let note = value["note"] as? String {
                             transaction.note = note
                         }
@@ -412,6 +417,7 @@ class ViewTransactionController: UIViewController {
                     let amount2 = b.amount!
                     let type = b.transactionType!
                     let note = b.note ?? ""
+                    let date = b.date ?? ""
                     //MARK: - Get total amount for header
                     if b.transactionType == TransactionType.expense.getValue(){
                         amount -= b.amount!
@@ -421,7 +427,7 @@ class ViewTransactionController: UIViewController {
                     //MARK: - Get item for each section
                     let components = convertToDate(resultDate: b.date!)
                     let dateModel = getDateModel(components: components)
-                    items.append(CategoryItem(id: b.id!,dateModel: dateModel, amount: amount2,type: type, note: note))
+                    items.append(CategoryItem(id: b.id!,dateModel: dateModel, date: date, amount: amount2,type: type, note: note))
                 }
             }
             for a in categories {
@@ -531,9 +537,10 @@ class ViewTransactionController: UIViewController {
         Defined.ref.child("Category").observeSingleEvent(of: .value) {[weak self] (snapshot) in
             guard let `self` = self else {return}
             if let snapshots = snapshot.children.allObjects as? [DataSnapshot]{
-                let myKey = (snapshot as AnyObject).key as String
                 //expense/income
                 for mySnap in snapshots {
+                    let myKey = (mySnap as AnyObject).key as String
+                    
                     //key inside expense/income
                     if let mySnap = mySnap.children.allObjects as? [DataSnapshot]{
                         for snap in mySnap {

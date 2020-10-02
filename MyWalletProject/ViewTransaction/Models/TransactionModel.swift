@@ -24,9 +24,12 @@ struct TransactionItem {
     var id: String
     var categoryName: String
     var note: String? = nil
+    var date: String? = nil
     var amount: Int
     var iconImage: String
     var type: String
+    var eventid:String? = nil
+
 }
 
 struct TransactionSection {
@@ -45,6 +48,7 @@ struct CategoryHeader {
 struct CategoryItem {
     var id: String
     var dateModel: DateModel
+    var date:String 
     var amount: Int
     var type: String
     var note: String? = ""
@@ -61,6 +65,13 @@ struct DateModel {
     var year: Int
     var weekDay: String
 }
+
+struct DateModel2 {
+    var date: Int
+    var month: Int
+    var year: Int
+}
+
 
 struct TransactionDate {
     var dateString: String

@@ -53,9 +53,10 @@ class AppRouter {
 extension RouterType{
     func getVc() -> UIViewController {
         switch self {
-        case .transactionDetail(let item, let header):
+        case .transactionDetail(let item, let header ):
             let vc = UIStoryboard(name: "ViewTransaction", bundle: nil).instantiateViewController(withIdentifier: "detail") as! DetailTransactionController
             vc.setUpDataTransactionView(item: item, header: header)
+            
             return vc
         case .categoryDetail(let item, let header):
             let vc = UIStoryboard(name: "ViewTransaction", bundle: nil).instantiateViewController(withIdentifier: "detail") as! DetailTransactionController

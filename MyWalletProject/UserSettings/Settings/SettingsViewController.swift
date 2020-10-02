@@ -15,7 +15,6 @@ protocol SettingsViewControllerProtocol {
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var avaImage: UIImageView!
-    
     @IBOutlet weak var txtUsername: UITextField!
     @IBOutlet weak var txtBalance: UITextField!
     @IBOutlet weak var txtDate: UITextField!
@@ -23,24 +22,19 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var txtGender: UITextField!
     @IBOutlet weak var txtAddress: UITextField!
     @IBOutlet weak var txtLanguage: UITextField!
-    
     @IBOutlet weak var scrollView: UIScrollView!
-    
     @IBOutlet weak var btnSave: UIButton!
     @IBOutlet weak var btnCancel: UIButton!
     
     
     
     var user = Account()
-    
     var presenter: SettingsPresenter = SettingsPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureButton(btnSave)
         configureButton(btnCancel)
-        
         self.title = "Information"
     }
     
@@ -61,7 +55,6 @@ class SettingsViewController: UIViewController {
     
     @IBAction func btnSaveClicked(_ sender: Any) {
         presenter.viewDelegate = self
-        
         user.name = txtUsername.text!
         user.balance = Int(txtBalance.text!) ?? -1
         user.email = "userid1@gmail.com"
@@ -70,8 +63,8 @@ class SettingsViewController: UIViewController {
         user.gender = txtGender.text!
         user.address = txtAddress.text!
         user.language = txtLanguage.text!
-        
         presenter.validateInput(user)
+        
     }
     
     @IBAction func btnCancelClicked(_ sender: Any) {
