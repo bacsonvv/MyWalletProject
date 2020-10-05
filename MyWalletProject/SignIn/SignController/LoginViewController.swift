@@ -27,24 +27,22 @@ class LoginViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        btnLoginFacebook.layer.borderWidth = 1
-        btnLoginFacebook.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        btnLoginFacebook.layer.cornerRadius = btnLoginFacebook.bounds.height / 4
-        btnLoginGoogle.layer.borderWidth = 1
-        btnLoginGoogle.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        btnLoginGoogle.layer.cornerRadius = btnLoginGoogle.bounds.height / 4
-        btnLoginApple.layer.borderWidth = 1
-        btnLoginApple.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        btnLoginApple.layer.cornerRadius = btnLoginApple.bounds.height / 4
+        customButton(listButton: [btnLoginFacebook,btnLoginGoogle,btnLoginApple])
     }
     
     //MARK: - viewDidload
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         autoLogin()
-        
         GIDSignIn.sharedInstance().presentingViewController = self
+    }
+    
+    func customButton(listButton:[UIButton]) {
+        for button in listButton {
+            button.layer.borderWidth = 1
+            button.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            button.layer.cornerRadius = 6
+        }
     }
     
     //MARK: - Login facebook click

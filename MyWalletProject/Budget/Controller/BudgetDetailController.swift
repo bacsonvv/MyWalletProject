@@ -19,15 +19,14 @@ protocol BudgetDetailControllerDelegate {
 }
 
 class BudgetDetailController: UIViewController {
-
+    
     @IBOutlet weak var tblBudget: UITableView!
     
     var ref = Database.database().reference()
-    
     var budgetObject:Budget = Budget()
     var spent:Int = 0
     
-    var delegateBudgetDetail:BudgetControllerDelegate?
+    var delegateBudgetDetail:BudgetDetailControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,22 +36,18 @@ class BudgetDetailController: UIViewController {
         
         tblBudget.register(UINib(nibName: "DetailBudgetCell", bundle: nil), forCellReuseIdentifier: "DetailBudgetCell")
     }
- 
+    
     @IBAction func btnBackClick(_ sender: Any) {
-        self.delegateBudgetDetail?.reloadDataListBudgetintoBudgetController()
+        self.delegateBudgetDetail?.reloadDataListBudgetintoBudgetDetailController()
         navigationController?.popViewController(animated: true)
     }
     
     
     @IBAction func btnEditClick(_ sender: Any) {
         let vc = UIStoryboard.init(name: "budget", bundle: nil).instantiateViewController(withIdentifier: "TestController") as! BudgetController
-        
-//        UserDefaults.standard.set(lblNameCate.text!, forKey: "name")
-        
         vc.type = "Edit Budget"
         vc.budgetObject = budgetObject
         vc.delegateBudgetController = self
-        
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -67,11 +62,13 @@ extension BudgetDetailController: UITableViewDataSource , UITableViewDelegate {
         
         cell.prgSpend.layer.cornerRadius = cell.prgSpend.bounds.height / 2
         cell.prgSpend.layer.masksToBounds = true
-        
         cell.setDataBackground(cateImage: budgetObject.categoryImage!, cateName: budgetObject.categoryName!, amount: budgetObject.amount!, startdate: budgetObject.startDate!, endDate: budgetObject.endDate!, spend: spent)
         
-        cell.btnDelete.addTarget(self, action: #selector(btnDeleteTapped), for: .touchUpInside)
+        UserDefaults.standard.set(budgetObject.categoryName!, forKey: "name")
+        UserDefaults.standard.set(budgetObject.startDate!, forKey: "startdate")
+        UserDefaults.standard.set(budgetObject.endDate!, forKey: "enddate")
         
+        cell.btnDelete.addTarget(self, action: #selector(btnDeleteTapped), for: .touchUpInside)
         cell.btnTransaction.addTarget(self, action: #selector(btnListTransactionTapped), for: .touchUpInside)
         
         return cell
@@ -88,16 +85,16 @@ extension BudgetDetailController : DetailBudgetTappedButton {
     @objc func btnDeleteTapped(){
         let alertController = UIAlertController(title: "Do you want exit", message: nil, preferredStyle: .alert)
         
-         let confirmAction = UIAlertAction(title: "OK", style: .default) { (_) in
-        
+        let confirmAction = UIAlertAction(title: "OK", style: .default) { (_) in
+            
             self.ref.child("Account").child("userid1").child("budget").child("\(self.budgetObject.id!)").removeValue()
             
-            self.delegateBudgetDetail?.reloadDataListBudgetintoBudgetController()
+            self.delegateBudgetDetail?.reloadDataListBudgetintoBudgetDetailController()
             self.navigationController?.popViewController(animated: true)
             
-         }
+        }
         
-         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
             print("cancel")
         }
         
