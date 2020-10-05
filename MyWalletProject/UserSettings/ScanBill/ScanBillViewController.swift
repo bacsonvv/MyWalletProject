@@ -38,6 +38,8 @@ class ScanBillViewController: UIViewController {
         removeTextViewLeftPadding(txtNote)
         
         self.title = "Bill Scanner"
+        
+        // Comment for testing git
     }
     
     // MARK: - Hide tab bar
