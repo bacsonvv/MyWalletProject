@@ -50,6 +50,7 @@ class BudgetListViewController: UIViewController , UITableViewDataSource , UITab
     
     @objc func refresh(_ sender: AnyObject){
         getDataBudget()
+        tblBudget.reloadData()
         refreshControl.endRefreshing()
     }
     
@@ -97,63 +98,63 @@ class BudgetListViewController: UIViewController , UITableViewDataSource , UITab
         
         // Load api Transaction expense
         dispatchGroup.enter()
-          ref.child("Account").child("userid1").child("transaction").child("expense").observeSingleEvent(of: .value) { (data) in
-              for case let child as DataSnapshot in data.children{
-                  guard let dict = child.value as? [String:Any] else {
-                      print("Error")
-                      return
-                  }
-                  
-                  let cateName = dict["categoryid"] as? String
-                  let amount = dict["amount"] as? Int
-                  let date = dict["date"] as? String
-                  
-                  let transaction = Transaction(amount: amount, categoryid: cateName , date: date)
-                  
-                  self.listTransaction.append(transaction)
-              }
-              dispatchGroup.leave()
-          }
-          
+        ref.child("Account").child("userid1").child("transaction").child("expense").observeSingleEvent(of: .value) { (data) in
+            for case let child as DataSnapshot in data.children{
+                guard let dict = child.value as? [String:Any] else {
+                    print("Error")
+                    return
+                }
+                
+                let cateName = dict["categoryid"] as? String
+                let amount = dict["amount"] as? Int
+                let date = dict["date"] as? String
+                
+                let transaction = Transaction(amount: amount, categoryid: cateName , date: date)
+                
+                self.listTransaction.append(transaction)
+            }
+            dispatchGroup.leave()
+        }
+        
         // load api transaction income
-          dispatchGroup.enter()
-          ref.child("Account").child("userid1").child("transaction").child("income").observeSingleEvent(of: .value) { (data) in
-              for case let child as DataSnapshot in data.children{
-                  guard let dict = child.value as? [String:Any] else {
-                      print("Error")
-                      return
-                  }
-                  
-                  let cateName = dict["categoryid"] as? String
-                  let amount = dict["amount"] as? Int
-                  let date = dict["date"] as? String
-                  
-                  let transaction = Transaction(amount: amount, categoryid: cateName , date: date)
-                  
-                  self.listTransaction.append(transaction)
-              }
-              dispatchGroup.leave()
-          }
+        dispatchGroup.enter()
+        ref.child("Account").child("userid1").child("transaction").child("income").observeSingleEvent(of: .value) { (data) in
+            for case let child as DataSnapshot in data.children{
+                guard let dict = child.value as? [String:Any] else {
+                    print("Error")
+                    return
+                }
+                
+                let cateName = dict["categoryid"] as? String
+                let amount = dict["amount"] as? Int
+                let date = dict["date"] as? String
+                
+                let transaction = Transaction(amount: amount, categoryid: cateName , date: date)
+                
+                self.listTransaction.append(transaction)
+            }
+            dispatchGroup.leave()
+        }
         
         // Sau khi load hết api mới reload lại table
-          dispatchGroup.notify(queue: .main, execute: {
-              self.tblBudget.reloadData()
-          })
+        dispatchGroup.notify(queue: .main, execute: {
+            self.tblBudget.reloadData()
+        })
     }
     
     //MARK: lấy tổng số tiền đã tiêu theo tên Category
-    func getAmountListTransaction(cateName:String , startDate:String , endDate:String) -> Int {
+    func getAmountListTransaction(budget:Budget) -> Int {
         var amount = 0
         
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
         
-        let start = formatter.date(from: startDate)
-        let end = formatter.date(from: endDate)
+        let start = formatter.date(from: budget.startDate ?? "")
+        let end = formatter.date(from: budget.endDate ?? "")
         
         for transaction in listTransaction {
-            if (cateName == transaction.categoryid) {
-                var date = formatter.date(from: transaction.date!)
+            if (budget.categoryName == transaction.categoryid) {
+                let date = formatter.date(from: transaction.date!)
                 if let start = start , let end = end , let date = date{
                     if date >= start && date < end {
                         amount += transaction.amount ?? 0
@@ -174,7 +175,7 @@ class BudgetListViewController: UIViewController , UITableViewDataSource , UITab
                 self.totalMoneyCurrent += budget.amount ?? 0
                 self.lblTotalMoney.text = "Total: \(self.totalMoneyCurrent)"
             }
-        
+            
             return listBudgetCurrent.count
         }
         else{
@@ -195,27 +196,11 @@ class BudgetListViewController: UIViewController , UITableViewDataSource , UITab
             cell.prgFormCate.layer.masksToBounds = true
         }
         
-        if segmentIndex == 0 {
-            let categoryImage = listBudgetCurrent[indexPath.row].categoryImage ?? ""
-            let categoryName = listBudgetCurrent[indexPath.row].categoryName ?? ""
-            let amount = listBudgetCurrent[indexPath.row].amount ?? 0
-            let startDate = listBudgetCurrent[indexPath.row].startDate ?? ""
-            let endDate = listBudgetCurrent[indexPath.row].endDate ?? ""
-            let spentTransaction = getAmountListTransaction(cateName: categoryName , startDate: startDate , endDate: endDate)
-            
-            cell.setLayout(categoryImage: categoryImage, categoryName: categoryName, amount: amount, startDate: startDate, endDate: endDate , spent: spentTransaction)
-        }
-        
-        else{
-            let categoryImage = listBudgetFinish[indexPath.row].categoryImage ?? ""
-            let categoryName = listBudgetFinish[indexPath.row].categoryName ?? ""
-            let amount = listBudgetFinish[indexPath.row].amount ?? 0
-            let startDate = listBudgetFinish[indexPath.row].startDate ?? ""
-            let endDate = listBudgetFinish[indexPath.row].endDate ?? ""
-//            let spentTransaction = getAmountListTransaction(cateName: categoryName ?? "")
-            let spentTransaction = getAmountListTransaction(cateName: categoryName , startDate: startDate , endDate: endDate)
-            
-            cell.setLayout(categoryImage: categoryImage, categoryName: categoryName, amount: amount, startDate: startDate, endDate: endDate , spent: spentTransaction)
+        switch segmentIndex {
+        case 0:
+            cell.setLayout(budget: listBudgetCurrent[indexPath.row], spend: getAmountListTransaction(budget: listBudgetCurrent[indexPath.row]))
+        default:
+            cell.setLayout(budget: listBudgetFinish[indexPath.row], spend: getAmountListTransaction(budget: listBudgetFinish[indexPath.row]))
         }
         
         return cell
@@ -229,57 +214,28 @@ class BudgetListViewController: UIViewController , UITableViewDataSource , UITab
         
         let vc = UIStoryboard.init(name: "budget", bundle: nil).instantiateViewController(withIdentifier: "BudgetDetailController") as! BudgetDetailController
         
-        var id = 0
-        var categoryId = ""
-        var categoryName = ""
-        var categoryImage = ""
-        var transactionType = ""
-        var amount = 0
-        var startDate = ""
-        var endDate = ""
-        var spentTransaction = 0
-        
-        if segmentIndex == 0{
-            id = listBudgetCurrent[indexPath.row].id ?? 0
-            categoryId = listBudgetCurrent[indexPath.row].categoryId ?? ""
-            categoryName = listBudgetCurrent[indexPath.row].categoryName ?? ""
-            categoryImage = listBudgetCurrent[indexPath.row].categoryImage ?? ""
-            transactionType = listBudgetCurrent[indexPath.row].transactionType ?? ""
-            amount = listBudgetCurrent[indexPath.row].amount ?? 0
-            startDate = listBudgetCurrent[indexPath.row].startDate ?? ""
-            endDate = listBudgetCurrent[indexPath.row].endDate ?? ""
-            spentTransaction = getAmountListTransaction(cateName: categoryName, startDate: startDate, endDate: endDate)
-        }
-        else{
-            id = listBudgetFinish[indexPath.row].id ?? 0
-            categoryId = listBudgetFinish[indexPath.row].categoryId ?? ""
-            categoryName = listBudgetFinish[indexPath.row].categoryName ?? ""
-            categoryImage = listBudgetFinish[indexPath.row].categoryImage ?? ""
-            transactionType = listBudgetFinish[indexPath.row].transactionType ?? ""
-            amount = listBudgetFinish[indexPath.row].amount ?? 0
-            startDate = listBudgetFinish[indexPath.row].startDate ?? ""
-            endDate = listBudgetFinish[indexPath.row].endDate ?? ""
-            spentTransaction = getAmountListTransaction(cateName: categoryName, startDate: startDate, endDate: endDate)
+        switch segmentIndex {
+        case 0:
+            vc.budgetObject = listBudgetCurrent[indexPath.row]
+            vc.spent = getAmountListTransaction(budget: listBudgetCurrent[indexPath.row])
+        default:
+            vc.budgetObject = listBudgetFinish[indexPath.row]
+            vc.spent = getAmountListTransaction(budget: listBudgetFinish[indexPath.row])
         }
         
-        let budgetObject = Budget(id: id,categoryId: categoryId, categoryName: categoryName, categoryImage: categoryImage, transactionType: transactionType, amount: amount, startDate: startDate, endDate: endDate)
-        
-        vc.budgetObject = budgetObject
-        vc.spent = spentTransaction
         vc.delegateBudgetDetail = self
-        
         navigationController?.pushViewController(vc, animated: true)
     }
-
+    
     @IBAction func btnBackClick(_ sender: Any) {
-//        self.navigationController?.popViewController(animated: true)
         AppRouter.routerTo(from: RouterType.tabbar.getVc(), options: .transitionCrossDissolve, duration: 0.2, isNaviHidden: true)
     }
+    
     //MARK: Click Add
     @IBAction func btnAddClick(_ sender: Any) {
         
         let vc = UIStoryboard.init(name: "budget", bundle: nil).instantiateViewController(withIdentifier: "TestController") as! BudgetController
-
+        
         vc.type = "Add Budget"
         vc.delegateBudgetController = self
         

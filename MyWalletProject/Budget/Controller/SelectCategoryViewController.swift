@@ -19,51 +19,29 @@ class SelectCategoryViewController: UIViewController , UITableViewDataSource , U
     @IBOutlet weak var tblCategory: UITableView!
     
     var segmentIndex = 0
-    
     var budgetObject:Budget = Budget()
-    
     var listCateIncome:[Category] = []
     var listCateExpense:[Category] = []
-    
     var ref = Database.database().reference()
-    
     var type = ""
-    
     var name = ""
     
     var delegateCategory:SelectCategoryViewControllerDelegate?
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if segmentIndex == 0{
-            return listCateIncome.count
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        DispatchQueue.main.async {
+            self.getDataCateExpense()
+            self.getDataCateIncome()
         }
-        else{
-            return listCateExpense.count
-        }
-            
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tblCategory.dequeueReusableCell(withIdentifier: "CategoryCell") as! CategoryCell
+        // table category
+        tblCategory.dataSource = self
+        tblCategory.delegate = self
+        let nibName = UINib(nibName: "CategoryCell", bundle: nil)
+        tblCategory.register(nibName, forCellReuseIdentifier: "CategoryCell")
+        tblCategory.reloadData()
+        tblCategory.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tblCategory.frame.width, height: 0))
         
-        if segmentIndex == 0 {
-            let imgName = listCateIncome[indexPath.row].iconImage
-            let categoryName = listCateIncome[indexPath.row].name
-            cell.loadContent(imgName: imgName!, categoryName: categoryName!)
-        }
-        
-        else{
-            let imgName = listCateExpense[indexPath.row].iconImage
-            let categoryName = listCateExpense[indexPath.row].name
-            cell.loadContent(imgName: imgName!, categoryName: categoryName!)
-        }
-        
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
     }
     
     func getDataCateExpense() {
@@ -86,7 +64,6 @@ class SelectCategoryViewController: UIViewController , UITableViewDataSource , U
         }
     }
     
-    
     func getDataCateIncome() {
         listCateExpense.removeAll()
         
@@ -105,55 +82,53 @@ class SelectCategoryViewController: UIViewController , UITableViewDataSource , U
             }
             self.tblCategory.reloadData()
         }
-        
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if segmentIndex == 0 {
+            return listCateIncome.count
+        } else {
+            return listCateExpense.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tblCategory.dequeueReusableCell(withIdentifier: "CategoryCell") as! CategoryCell
+        if segmentIndex == 0 {
+            let imgName = listCateIncome[indexPath.row].iconImage
+            let categoryName = listCateIncome[indexPath.row].name
+            cell.loadContent(imgName: imgName!, categoryName: categoryName!)
+            
+        } else {
+            let imgName = listCateExpense[indexPath.row].iconImage
+            let categoryName = listCateExpense[indexPath.row].name
+            cell.loadContent(imgName: imgName!, categoryName: categoryName!)
+            
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        var categoryId = ""
-        var categoryName = ""
-        var categoryImage = ""
-        var transactionType = ""
-        
+
         if segmentIndex == 0{
-            categoryId = listCateIncome[indexPath.row].id ?? ""
-            categoryName = listCateIncome[indexPath.row].name ?? ""
-            categoryImage = listCateIncome[indexPath.row].iconImage ?? ""
-            transactionType = listCateIncome[indexPath.row].transactionType ?? ""
+            budgetObject.categoryId = listCateIncome[indexPath.row].id ?? ""
+            budgetObject.categoryName = listCateIncome[indexPath.row].name ?? ""
+            budgetObject.categoryImage = listCateIncome[indexPath.row].iconImage ?? ""
+            budgetObject.transactionType = listCateIncome[indexPath.row].transactionType ?? ""
+            
+        } else {
+            budgetObject.categoryId = listCateExpense[indexPath.row].id ?? ""
+            budgetObject.categoryName = listCateExpense[indexPath.row].name ?? ""
+            budgetObject.categoryImage = listCateExpense[indexPath.row].iconImage ?? ""
+            budgetObject.transactionType = listCateExpense[indexPath.row].transactionType ?? ""
         }
-        else{
-            categoryId = listCateExpense[indexPath.row].id ?? ""
-            categoryName = listCateExpense[indexPath.row].name ?? ""
-            categoryImage = listCateExpense[indexPath.row].iconImage ?? ""
-            transactionType = listCateExpense[indexPath.row].transactionType ?? ""
-        }
-        
-        budgetObject.categoryId = categoryId
-        budgetObject.categoryName = categoryName
-        budgetObject.categoryImage = categoryImage
-        budgetObject.transactionType = transactionType
         
         delegateCategory?.fetchDataCategory(budget: budgetObject, type: type)
         self.navigationController?.popViewController(animated: true)
-        
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        DispatchQueue.main.async {
-            self.getDataCateExpense()
-            self.getDataCateIncome()
-        }
-        
-        tblCategory.dataSource = self
-        tblCategory.delegate = self
-        
-        let nibName = UINib(nibName: "CategoryCell", bundle: nil)
-        tblCategory.register(nibName, forCellReuseIdentifier: "CategoryCell")
-        tblCategory.reloadData()
-        
-        tblCategory.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tblCategory.frame.width, height: 0))
         
     }
     
@@ -161,5 +136,5 @@ class SelectCategoryViewController: UIViewController , UITableViewDataSource , U
         segmentIndex = uiSegmentedControl.selectedSegmentIndex
         tblCategory.reloadData()
     }
-
+    
 }

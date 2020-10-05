@@ -15,6 +15,7 @@
 		56053C2E2525E88C00685FFC /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56053C282525E88C00685FFC /* CalendarViewController.swift */; };
 		56053C442525E8F500685FFC /* DetailBudgetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56053C422525E8F500685FFC /* DetailBudgetCell.xib */; };
 		56053C452525E8F500685FFC /* DetailBudgetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56053C432525E8F500685FFC /* DetailBudgetCell.swift */; };
+		56053C522527245C00685FFC /* CheckFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27F30F42526D7A200FF940B /* CheckFormat.swift */; };
 		56B8A7E72524835500B8E8F0 /* Signin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56B8A7E62524835500B8E8F0 /* Signin.storyboard */; };
 		56B8A7EC2524841400B8E8F0 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B8A7EB2524841400B8E8F0 /* LoginUseCase.swift */; };
 		56B8A7EE2524846400B8E8F0 /* LoginPresenterGG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B8A7ED2524846400B8E8F0 /* LoginPresenterGG.swift */; };
@@ -1289,6 +1290,7 @@
 				8A725C4E251C79FD00610758 /* CurrencyModel.swift in Sources */,
 				D269928F25247BCA0061EDF6 /* TableDetailEventController.swift in Sources */,
 				72A71926251DDF35003ED157 /* ReportViewController.swift in Sources */,
+				56053C522527245C00685FFC /* CheckFormat.swift in Sources */,
 				72873D7C25249A3F00313629 /* DetailPieChartVC.swift in Sources */,
 				8A3BB434251B6069008113E9 /* CurrencyViewController.swift in Sources */,
 				8A3BB431251B326E008113E9 /* SettingsUseCase.swift in Sources */,
@@ -1440,7 +1442,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1494,7 +1496,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
