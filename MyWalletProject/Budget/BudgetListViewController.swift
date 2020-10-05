@@ -50,6 +50,7 @@ class BudgetListViewController: UIViewController , UITableViewDataSource , UITab
     
     @objc func refresh(_ sender: AnyObject){
         getDataBudget()
+        tblBudget.reloadData()
         refreshControl.endRefreshing()
     }
     
