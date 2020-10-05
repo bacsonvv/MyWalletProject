@@ -63,7 +63,7 @@ class DetailTransactionController: UIViewController {
         eventName = item.eventid ?? ""
         categoryDate = item.date ?? ""
         dateModel = header.dateModel
-        categoryDate = "\(dateModel.weekDay), \(dateModel.date) \(dateModel.month) \(dateModel.year)"
+        categoryDate = "\(dateModel.weekDay), \(dateModel.date) \(dateModel.monthInt) \(dateModel.year)"
     }
     
     func setUpDataCategoryView(item: CategoryItem, header: CategoryHeader){
@@ -74,7 +74,7 @@ class DetailTransactionController: UIViewController {
         amount = item.amount
         icon = header.icon
         dateModel = item.dateModel
-        categoryDate = "\(dateModel.weekDay), \(dateModel.date) \(dateModel.month) \(dateModel.year)"
+        categoryDate = "\(dateModel.weekDay)/\(dateModel.date)/\(dateModel.monthInt)/\(dateModel.year)"
     }
     
    

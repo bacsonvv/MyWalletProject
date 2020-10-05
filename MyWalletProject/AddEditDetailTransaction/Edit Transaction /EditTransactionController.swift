@@ -72,7 +72,7 @@ class EditTransactionController: UIViewController, UITextFieldDelegate {
         txtCategory.text = categoryName
         txtNote.text = note
         txtAmount.text = "\(amount)"
-        txtDate.text = "\(dateModel.date)/\(dateModel.month)/\(dateModel.year)"
+        txtDate.text = "\(dateModel.date)/\(dateModel.monthInt)/\(dateModel.year)"
         iconImage.image = UIImage(named: icon)
     }
     func setUpData(type: String, transactionId: String, name: String,

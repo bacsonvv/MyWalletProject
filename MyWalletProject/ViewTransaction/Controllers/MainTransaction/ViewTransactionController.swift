@@ -343,7 +343,7 @@ class ViewTransactionController: UIViewController {
         let month = components.month!
         let date = components.day!
         let year = components.year!
-        let model = DateModel(date: date, month: months[month-1], year: year, weekDay: weekdays[weekDay-1])
+        let model = DateModel(date: date, month: months[month-1], monthInt: month, year: year, weekDay: weekdays[weekDay-1])
         return model
     }
     //MARK: - Get all sections in transaction view mode

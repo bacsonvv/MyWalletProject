@@ -62,14 +62,9 @@ struct CategorySection {
 struct DateModel {
     var date: Int
     var month: String
+    var monthInt: Int
     var year: Int
     var weekDay: String
-}
-
-struct DateModel2 {
-    var date: Int
-    var month: Int
-    var year: Int
 }
 
 
