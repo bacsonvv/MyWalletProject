@@ -96,12 +96,14 @@ extension RouterType{
             let vc = UIStoryboard(name: "ViewTransaction", bundle: nil).instantiateViewController(withIdentifier: "detail") as! DetailTransactionViewController
             let presenter = DetailTransactionPresenter(delegate: vc, usecase: DetailTransactionUseCase())
             vc.setUp(presenter: presenter)
+            vc.fetchTransaction(id: item.id)
             vc.setUpDataTransactionView(item: item, header: header)
             return vc
         case .categoryDetail(let item, let header):
             let vc = UIStoryboard(name: "ViewTransaction", bundle: nil).instantiateViewController(withIdentifier: "detail") as! DetailTransactionViewController
             let presenter = DetailTransactionPresenter(delegate: vc, usecase: DetailTransactionUseCase())
             vc.setUp(presenter: presenter)
+            vc.fetchTransaction(id: item.id)
             vc.setUpDataCategoryView(item: item, header: header)
             return vc
         case .balance:
@@ -152,9 +154,10 @@ extension RouterType{
             return vc
         case .viewTransaction:
             let vc = UIStoryboard(name: "ViewTransaction", bundle: nil).instantiateViewController(withIdentifier: "transaction_vc") as! ViewTransactionViewController
+            let front = UINavigationController(rootViewController: vc)
             let presenter = ViewTransactionPresenter(delegate: vc, usecase: ViewTransactionUseCase())
             vc.setUp(presenter: presenter)
-            return vc
+            return front
         case .account:
              let vc = UIStoryboard(name: "UserSettings", bundle: nil).instantiateViewController(withIdentifier: "userSettingsNav") as! UINavigationController
             return vc
