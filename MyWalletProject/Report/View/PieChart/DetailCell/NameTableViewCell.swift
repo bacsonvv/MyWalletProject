@@ -25,16 +25,10 @@ class NameTableViewCell: BaseTBCell {
         
     }
     
-    func setupIncome(_ sumIncome: Int) {
-        lblName.text = "Income"
-        lblMoney.textColor = .blue
+    func setupData(_ text: String, _ color: UIColor, _ sumIncome: Int) {
+        lblName.text = text
+        lblMoney.textColor = color
         lblMoney.text = String(formatter.string(from: NSNumber(value: sumIncome))!)
-    }
-    
-    func setupExpense(_ sumExpense: Int){
-        lblName.text = "Expense"
-        lblMoney.textColor = .red
-        lblMoney.text = String(formatter.string(from: NSNumber(value: sumExpense))!)
     }
     
 }

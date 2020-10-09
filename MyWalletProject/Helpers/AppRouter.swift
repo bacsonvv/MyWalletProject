@@ -28,12 +28,14 @@ enum RouterType {
     case tabbar
     case test
     case viewTransaction
-    case report
     case account
     case planningNavi
+    
+    //report
+    case report
     case barChartDetail
     case pieChartDetail
-    case dayBarChartDetail
+    
     case budgetTransaction(budgetObject: Budget)
     case eventTransaction(event: Event)
     case selectEvent
@@ -158,21 +160,20 @@ extension RouterType{
         case .account:
              let vc = UIStoryboard(name: "UserSettings", bundle: nil).instantiateViewController(withIdentifier: "userSettingsNav") as! UINavigationController
             return vc
-        case .report:
-             let vc = UIStoryboard(name: "Report", bundle: nil).instantiateViewController(withIdentifier: "ReportViewController") as! ReportViewController
-            return vc
         case .planningNavi:
             let vc = UIStoryboard(name: "ViewTransaction", bundle: nil).instantiateViewController(withIdentifier: "navi_second") as! SecondNavigationController
             return vc
-        case .barChartDetail:
-            let vc = UIStoryboard.init(name: "Report", bundle: Bundle.main).instantiateViewController(identifier: "detailSBC") as! DetailStackedBarChartVC
+        // MARK: - Report
+        case .report:
+             let vc = UIStoryboard(name: "Report", bundle: nil).instantiateViewController(withIdentifier: "ReportViewController") as! ReportViewController
             return vc
         case .pieChartDetail:
             let vc = UIStoryboard.init(name: "Report", bundle: Bundle.main).instantiateViewController(identifier: "detailPC") as! DetailPieChartVC
             return vc
-        case .dayBarChartDetail:
-            let vc = UIStoryboard.init(name: "Report", bundle: Bundle.main).instantiateViewController(identifier: "dayDetailSBC") as! DayDetailSBC
+        case .barChartDetail:
+            let vc = UIStoryboard.init(name: "Report", bundle: Bundle.main).instantiateViewController(identifier: "detailSBC") as! DetailStackedBarChartVC
             return vc
+                  
         case .budgetTransaction(let budgetObject):
             let vc = UIStoryboard(name: "ViewTransaction", bundle: nil).instantiateViewController(withIdentifier: "budgetTransaction_vc") as! BudgetTransactionViewController
             vc.setUpBudget(budget: budgetObject)

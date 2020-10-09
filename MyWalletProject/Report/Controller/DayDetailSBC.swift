@@ -20,7 +20,6 @@ class DayDetailSBC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initTableViews()
-        self.title = "14/09/2020 - 20/09/2020"
     }
     
     @IBAction func popToView(_ sender: Any) {

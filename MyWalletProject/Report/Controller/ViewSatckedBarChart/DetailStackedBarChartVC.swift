@@ -13,6 +13,8 @@ class DetailStackedBarChartVC: UIViewController {
     var sumExpense = 0
     var sumIncome = 0
     var date = ""
+    var presenter: DetailSBCPresenter?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
@@ -26,6 +28,10 @@ class DetailStackedBarChartVC: UIViewController {
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 400
+    }
+    
+    func setUp(presenter: DetailSBCPresenter){
+        self.presenter = presenter
     }
     
     func getData(info: SumInfo) {
@@ -45,7 +51,7 @@ extension DetailStackedBarChartVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 1
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -63,9 +69,9 @@ extension DetailStackedBarChartVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if indexPath.section != 0 {
-//            let vc = UIStoryboard.init(name: "Report", bundle: Bundle.main).instantiateViewController(identifier: "dayDetailSBC") as! DayDetailSBC
-//            navigationController?.pushViewController(vc, animated: true)
-//        }
+        //        if indexPath.section != 0 {
+        //            let vc = UIStoryboard.init(name: "Report", bundle: Bundle.main).instantiateViewController(identifier: "dayDetailSBC") as! DayDetailSBC
+        //            navigationController?.pushViewController(vc, animated: true)
+        //        }
     }
 }

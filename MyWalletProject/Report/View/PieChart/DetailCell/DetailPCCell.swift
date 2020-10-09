@@ -22,7 +22,10 @@ class DetailPCCell: BaseTBCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        // Configure the view for the selected state
+    }
+    
+    func setupLabel(_ color: UIColor) {
+        lblMoney.textColor = color
     }
     
 }
