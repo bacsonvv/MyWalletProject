@@ -66,11 +66,20 @@ class DetailPieTableViewCell: BaseTBCell, ChartViewDelegate {
         set.valueLinePart2Length = 0.4
         set.xValuePosition = .insideSlice
         
+//        set.xValuePosition = .outsideSlice
+//        set.yValuePosition = .outsideSlice
+//
         let data = PieChartData(dataSet: set)
         data.setValueFont(.systemFont(ofSize: 11, weight: .light))
         data.setValueTextColor(.black)
         set.drawValuesEnabled = false
         data.highlightEnabled = false
+//        let pFormatter = NumberFormatter()
+//        pFormatter.numberStyle = .percent
+//        pFormatter.maximumFractionDigits = 1
+//        pFormatter.multiplier = 1
+//        pFormatter.percentSymbol = " %"
+//        data.setValueFormatter(DefaultValueFormatter(formatter: pFormatter))
         
         chartView.data = data
         chartView.highlightValues(nil)
