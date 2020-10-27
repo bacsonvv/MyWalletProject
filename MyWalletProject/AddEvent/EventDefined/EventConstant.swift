@@ -9,5 +9,5 @@
 import UIKit
 
 class EventConstant {
-        let userID = ""
+    let userID = ""
 }

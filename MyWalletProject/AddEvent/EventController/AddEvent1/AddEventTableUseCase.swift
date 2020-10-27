@@ -19,7 +19,6 @@ class AddEventTableUseCase  {
     
     //add data
     func addData(event: Event , state: Int)  {
-        
         if state == 0 {
             let dispatchGroup = DispatchGroup()
             dispatchGroup.enter()
@@ -31,7 +30,7 @@ class AddEventTableUseCase  {
                     if  snapshot.childrenCount == 0   {
                         self.int = 1
                         newChild = 1
-                    } else{
+                    } else {
                         newChild = Int((category as AnyObject).key)! + 1
                         self.int = newChild
                     }
@@ -39,42 +38,31 @@ class AddEventTableUseCase  {
                 dispatchGroup.leave()
             })
             
-            // Mark: adđ
+            // Mark: add
             dispatchGroup.notify(queue: .main) {
-                let event1 = [ "id": String(newChild),
-                               "name": event.name ,
-                               "date": event.date,
-                               "eventImage": event.eventImage,
-                               "spent": 0,
-                               "status": "true"]
-                    as [String : Any]
+                let event1 = ["id": String(newChild),
+                              "name": event.name ?? "",
+                              "date": event.date ?? "",
+                              "eventImage": event.eventImage ?? "",
+                              "spent": 0,
+                              "status": "true"] as [String : Any]
                 Defined.ref.child(Path.event.getPath()).child(String(newChild)).updateChildValues(event1,withCompletionBlock: { error , ref in
-                    if error == nil {
-                    }else{
-                    }
+                    if error == nil {}
+                    else{}
                 })
-                
             }
         } else {
-            let event1 = [ "id":event.id,
-                           "name": event.name ,
-                           "date": event.date,
-                           "eventImage": event.eventImage,
-                           "spent": 0,
-                           "status": event.status]
-                as [String : Any]
-            var eventEDit = Event(id: event.id, name: event.name , date: event.date, eventImage: event.eventImage, spent: 0, status: event.status)
-            Defined.ref.child(Path.event.getPath()).child(event.id!).updateChildValues(event1,withCompletionBlock: { error , ref in
+            let event1 = ["id": event.id ?? "",
+                          "name": event.name ?? "",
+                          "date": event.date ?? "",
+                          "eventImage": event.eventImage ?? "",
+                          "spent": 0,
+                          "status": event.status ?? ""] as [String : Any]
+            let eventEDit = Event(id: event.id, name: event.name , date: event.date, eventImage: event.eventImage, spent: 0, status: event.status)
+            Defined.ref.child(Path.event.getPath()).child(event.id ?? "").updateChildValues(event1,withCompletionBlock: { error , ref in
                 self.delegate?.editEvent(event: eventEDit)
-//                if error == nil {
-////                    self.delegate?.editEvent(event: eventEDit)
-//                }else{
-//                }
             })
-            
         }
     }
-    
-    
 }
 

@@ -18,7 +18,6 @@ class EventImgUseCase {
     var imgEvents = [String]()
     weak var delegate: EventImgUseCaseDelegate?
     
-    
     // Get data Firebase
     func fetchData()  {
         Defined.ref.child(Path.imageLibrary.getPath()).observe( .value) { (snapshot) in
@@ -31,12 +30,6 @@ class EventImgUseCase {
                 self.imgEvents.append(img)
             }
             self.delegate?.data(imgEvents: self.imgEvents)
-
         }
-
-        
-        // limit
-        
     }
-    
 }

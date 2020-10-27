@@ -13,11 +13,9 @@ protocol EventPresenterDelegate: class {
 }
 
 class EventPresenter {
-    
     weak var delegate: EventPresenterDelegate?
     fileprivate var eventUseCase: EventUseCase?
     let dispatchGroup = DispatchGroup()
-    
     
     init(delegate: EventPresenterDelegate, usecase: EventUseCase) {
         self.delegate = delegate
@@ -33,14 +31,10 @@ class EventPresenter {
     func fetchDataFinished()  {
         eventUseCase?.getEventFinished()
     }
-    func pushVIew()  {  
-    }
 }
 
 extension EventPresenter: EventUseCaseDelegate{
     func getData(arrEvent: [Event], arrNameEvent: [String]) {
         delegate?.getDataEvent(arrEvent: arrEvent, arrNameEvent: arrNameEvent)
     }
-    
-    
 }

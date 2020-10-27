@@ -9,17 +9,7 @@
 import Foundation
 
 class FirebasePath {
-    //    static var transaction = "Account/\(Defined.defaults.string(forKey: Constants.userid) ?? "")/transaction"
-    //    static var expense = "Account/\(Defined.defaults.string(forKey: Constants.userid) ?? "")/transaction/expense"
-    //    static var income = "Account/\(Defined.defaults.string(forKey: Constants.userid) ?? "")/transaction/income"
-    //    static var information = "Account/\(Defined.defaults.string(forKey: Constants.userid) ?? "")/information"
-    //    static var balance = "Account/\(Defined.defaults.string(forKey: Constants.userid) ?? "")/information/balance"
-    //    static var budget = "Account/\(Defined.defaults.string(forKey: Constants.userid) ?? "")/budget"
-    //    static var event = "Account/\(Defined.defaults.string(forKey: Constants.userid) ?? "")/event"
-    //    static var category = "Category"
-    //    static var cateExpense = "Category/expense"
-    //    static var cateIncome = "Category/income"
-    //    static var imagelibrary = "ImageLibrary"
+
 }
 
 enum Path {

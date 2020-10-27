@@ -39,8 +39,8 @@ class EventImgViewController: UIViewController {
     func setUp(presenter: EventImgPresenter) {
         self.presenter = presenter
     }
-    
 }
+
 extension EventImgViewController: EventImgPresenterDelegate{
     func getNumberOfEventImg(imgs : [String]) {
         if imgs.count == 0 {
@@ -48,8 +48,8 @@ extension EventImgViewController: EventImgPresenterDelegate{
         }
         self.imgs = imgs
     }
-     
 }
+
 extension EventImgViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imgs.count
@@ -60,9 +60,9 @@ extension EventImgViewController: UICollectionViewDelegate, UICollectionViewData
         imgEvent.setUp(data: imgs[indexPath.row])
         return imgEvent
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-         completionHandler?(imgs[indexPath.row])
+        completionHandler?(imgs[indexPath.row])
         self.navigationController?.popViewController(animated: true)
     }
-    
 }

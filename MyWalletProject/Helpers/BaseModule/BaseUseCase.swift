@@ -45,7 +45,7 @@ class BaseUseCase {
                         model.id = snapshot.key
                         model.transactionType = snapshots.key
                         allTransactions.append(model)
-                    } catch let error {
+                    } catch let _ {
                     }
                 }
             }

@@ -15,7 +15,7 @@ protocol AddEventPresenterDelegate: class {
 class AddEventPresenter: AddEventTableUseCaseDelegate {
     
     weak var delegate: AddEventPresenterDelegate?
-       fileprivate var addEventTavbleUseCase: AddEventTableUseCase?
+    fileprivate var addEventTavbleUseCase: AddEventTableUseCase?
     
     func editEvent(event: Event) {
         delegate?.data(event: event)
@@ -30,11 +30,5 @@ class AddEventPresenter: AddEventTableUseCaseDelegate {
     func addDataEvent(event: Event, state: Int)  {
         addEventTavbleUseCase?.addData(event: event, state: state)
     }
-    
-    func alertController()  {
-        
-    }
-
-    
 }
 

@@ -12,9 +12,9 @@ class DayDetailCell: BaseTBCell {
 
     @IBOutlet weak var lblTypeOfMoney: UILabel!
     @IBOutlet weak var lblMoney: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

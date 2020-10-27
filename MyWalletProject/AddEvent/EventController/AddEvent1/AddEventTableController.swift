@@ -30,6 +30,7 @@ class AddEventTableController: UITableViewController {
     //Load view
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setUpView()
         let tapGestureRecognizer =  UITapGestureRecognizer(target: self, action: #selector(keyBoard))
         tapGestureRecognizer.cancelsTouchesInView = false
@@ -48,7 +49,7 @@ class AddEventTableController: UITableViewController {
     
     @IBAction func btnSave(_ sender: Any) {        
         add()
-        let alert1 = AlertUtil.showAlert(from: self, with: "Message", message: "Success") { (_) in
+        _ = AlertUtil.showAlert(from: self, with: "Message", message: "Success") { (_) in
             self.navigationController?.popViewController(animated: true)
         }
     }
@@ -60,15 +61,14 @@ class AddEventTableController: UITableViewController {
     func setUpView()  {
         if event.name != nil {
             viewImg.alpha = 0
-            tfNameEvent.text = event.name!
-            tfDate.text = event.date!
-            imgCategory.image = UIImage(named: event.eventImage!)
-            eventImg = event.eventImage!
-        } else {
-        }
-        
+            tfNameEvent.text = event.name ?? ""
+            tfDate.text = event.date ?? ""
+            imgCategory.image = UIImage(named: event.eventImage ?? "")
+            eventImg = event.eventImage ?? ""
+        } else {}
     }
 }
+
 extension AddEventTableController : AddEventPresenterDelegate, UITextFieldDelegate{
     func data(event: Event) {
         self.event = event
@@ -84,7 +84,7 @@ extension AddEventTableController : AddEventPresenterDelegate, UITextFieldDelega
     // gioi han ky tu nhap vao name event
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let maxLength = 50
-        let currentString: NSString = textField.text as! NSString
+        let currentString: NSString = textField.text! as NSString
         let newString: NSString =
             currentString.replacingCharacters(in: range, with: string) as NSString
         return newString.length <= maxLength
@@ -115,20 +115,21 @@ extension AddEventTableController : AddEventPresenterDelegate, UITextFieldDelega
         vc.setUp(presenter: presenter)
         navigationController?.pushViewController(vc, animated: true)
     }
+    
     @objc  func keyBoard() {
         view.endEditing(true)
     }
+    
     func add()  {
         if state == 0  {
-            nameEvent = tfNameEvent.text?.trimmingCharacters(in: .whitespaces) as! String
+            nameEvent = tfNameEvent.text?.trimmingCharacters(in: .whitespaces) ?? ""
             if !nameEvents.contains(nameEvent) {
-                if tfDate.text!.isEmpty || nameEvent.isEmpty || eventImg.isEmpty {
-                    let alert = defined.alert(state: state)
-                    let alert2 = AlertUtil.showAlert(from: self, with: "Message", message: "Please enter fully")
-                }else {
-                    let event = Event(id: nil, name: nameEvent, date: tfDate.text!, eventImage: eventImg, spent: 0)
+                if (tfDate.text ?? "").isEmpty || nameEvent.isEmpty || eventImg.isEmpty {
+                    _ = defined.alert(state: state)
+                    _ = AlertUtil.showAlert(from: self, with: "Message", message: "Please enter fully")
+                } else {
+                    let event = Event(id: nil, name: nameEvent, date: tfDate.text ?? "", eventImage: eventImg, spent: 0)
                     self.presenter?.addDataEvent(event: event, state: state)
-                    
                 }
             } else {
                 let alert = defined.alert(state: 4)
@@ -136,17 +137,18 @@ extension AddEventTableController : AddEventPresenterDelegate, UITextFieldDelega
             }
         }
         else {
-            nameEvent = tfNameEvent.text?.trimmingCharacters(in: .whitespaces) as! String
-            if tfDate.text!.isEmpty || nameEvent.isEmpty || eventImg.isEmpty {
-                let alert2 = AlertUtil.showAlert(from: self, with: "Message", message: "Please enter fully")
-            }else {
-                let event = Event(id: self.event.id, name: tfNameEvent.text!, date: tfDate.text!, eventImage: eventImg, spent: self.event.spent, status: self.event.status)
+            nameEvent = tfNameEvent.text?.trimmingCharacters(in: .whitespaces) ?? ""
+            if (tfDate.text ?? "").isEmpty || nameEvent.isEmpty || eventImg.isEmpty {
+                _ = AlertUtil.showAlert(from: self, with: "Message", message: "Please enter fully")
+            } else {
+                let event = Event(id: self.event.id, name: tfNameEvent.text ?? "", date: tfDate.text ?? "", eventImage: eventImg, spent: self.event.spent, status: self.event.status)
                 competionHandler?(event)
                 self.presenter?.addDataEvent(event: event, state: state)
             }
         }
     }
 }
+
 extension AddEventTableController {
     override var hidesBottomBarWhenPushed: Bool {
         get{

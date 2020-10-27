@@ -20,7 +20,6 @@ class DetailPCCell: BaseTBCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
     }
     
     func setupLabel(_ color: UIColor) {

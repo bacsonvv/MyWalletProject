@@ -22,6 +22,7 @@ class DetailPresenter {
         self.detailEventUseCase = useCase
         self.detailEventUseCase?.delegate = self
     }
+    
     //Xoa Event
     func responseDataEvent(event: Event) {
         detailEventUseCase?.deleteData(event: event)
@@ -29,9 +30,10 @@ class DetailPresenter {
     }
     
     // Danh dau hoan tat
-    func markedComple(event: Event) {
-        detailEventUseCase?.marKedCompele(event: event)
+    func markedComplete(event: Event) {
+        detailEventUseCase?.markedAsComplete(event: event)
     }
+    
     // Danh dau chua hoan tat
     func incompleteMarkup(event: Event)  {
         detailEventUseCase?.incompleteMarkup(event: event)
@@ -42,19 +44,18 @@ class DetailPresenter {
            delegate?.responData(number: checkDate.stillDate(endDate: event.date!))
     }
     
-    //Gêtvent
+    //GetEvent
     func getEvent(event: Event)  {
         detailEventUseCase?.getData(event: event)
     }
 }
+
 extension DetailPresenter: DetailEventUseCaseDelegate{
     func resultEvent(event: Event) {
         delegate?.responEvent(event: event)
     }
     
-    func marKedCompeleEvent(event: Event) {
+    func markedAsCompletedEvent(event: Event) {
         
     }
-    
-    
 }

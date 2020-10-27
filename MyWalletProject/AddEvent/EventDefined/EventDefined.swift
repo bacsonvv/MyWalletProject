@@ -15,12 +15,12 @@ class EventDefined {
     func alert(state: Int) -> UIAlertController{
         var alert = UIAlertController()
         if state == 0 {
-             alert = UIAlertController(title: "Error", message: "Please enter fully", preferredStyle: UIAlertController.Style.actionSheet)
+            alert = UIAlertController(title: "Error", message: "Please enter fully", preferredStyle: UIAlertController.Style.actionSheet)
         } else if state == 3{
-             alert = UIAlertController(title: "Error", message: "The event cannot be a date in the past", preferredStyle: UIAlertController.Style.actionSheet)
+            alert = UIAlertController(title: "Error", message: "The event cannot be a date in the past", preferredStyle: UIAlertController.Style.actionSheet)
         } else if state == 4 {
-           alert = UIAlertController(title: "Error", message: "This event already exists", preferredStyle: UIAlertController.Style.actionSheet)
-                         
+            alert = UIAlertController(title: "Error", message: "This event already exists", preferredStyle: UIAlertController.Style.actionSheet)
+            
         }
         alert.addAction(UIAlertAction(title: "ok", style: UIAlertAction.Style.default, handler: nil))
         return alert
@@ -28,7 +28,7 @@ class EventDefined {
     func alert1()  -> UIAlertController {
         let alert = UIAlertController(title: "Error", message: "Please enter fully", preferredStyle: UIAlertController.Style.actionSheet)
         alert.addAction(UIAlertAction(title: "ok", style: UIAlertAction.Style.default, handler: nil))
-     return alert
+        return alert
     }
     
     func checkTimer() {

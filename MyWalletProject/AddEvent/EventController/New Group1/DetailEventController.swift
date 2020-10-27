@@ -25,6 +25,7 @@ class DetailEventController: UITableViewController {
     @IBOutlet weak var lbMoney: UILabel!
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var lblStillDate: UILabel!
+    
     // Load view
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,19 +41,20 @@ class DetailEventController: UITableViewController {
         let alertController = UIAlertController(title: "Are you sure ? ", message: nil, preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "OK", style: .default) { (_) in   
             if self.status == "true" {
-                self.presenter?.markedComple(event: self.event)
-            } else{
+                self.presenter?.markedComplete(event: self.event)
+            } else {
                 self.presenter?.incompleteMarkup(event: self.event)
             }
             self.navigationController?.popViewController(animated: true)
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
-        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
         alertController.addAction(confirmAction)
         alertController.addAction(cancelAction)
-        self.present(alertController, animated: true, completion: nil )
         
+        self.present(alertController, animated: true, completion: nil )
     }
+    
     // Chỉnh sửa Event
     @IBAction func btnEdit(_ sender: Any) {
         let vc = UIStoryboard(name: "AddEvent", bundle: nil).instantiateViewController(identifier: "AddEventTableController") as! AddEventTableController
@@ -62,7 +64,6 @@ class DetailEventController: UITableViewController {
         vc.event = self.event
         vc.title = " Edit Event"
         vc.competionHandler = {
-            print($0)
             self.event = $0
         }
         self.navigationController?.pushViewController(vc, animated: true)
@@ -72,14 +73,14 @@ class DetailEventController: UITableViewController {
     @IBAction func btnDelete(_ sender: Any) {
         let alertController = UIAlertController(title: "Are you sure ? ", message: nil, preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "OK", style: .default) { (_) in
-            
             self.presenter?.responseDataEvent(event: self.event)
             self.navigationController?.popViewController(animated: true)
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
-        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in }
         alertController.addAction(confirmAction)
         alertController.addAction(cancelAction)
+        
         self.present(alertController, animated: true, completion: nil )
     }
     
@@ -112,26 +113,27 @@ extension DetailEventController : DetailPresenterDelegate{
         self.event = event
         setUpView()
     }
+    
     func responData(number: String) {
         lblStillDate.text = number
     }
     
     // setup view
     func setUpView()  {
-        if  !checkDate.checkDate(dateEnd: event.date!) {
+        if !checkDate.checkDate(dateEnd: event.date ?? "") {
             btnStatus.setTitle("incomplete markup" , for: .normal)
-            status = event.status!
+            status = event.status ?? ""
             btnStatus.isEnabled = false
-        } else if  event.status == "false"{
+        } else if event.status == "false"{
             btnStatus.setTitle("incomplete markup" , for: .normal)
             status = event.status!
-        }
-        else {
+        } else {
             status = "true"
         }
-        imgEvent.image = UIImage(named: event.eventImage! )
+        
+        imgEvent.image = UIImage(named: event.eventImage ?? "")
         tfNameEvent.text = event.name
         lblDate.text = event.date
-        lbMoney.text = format.formatInt(so: event.spent!)
+        lbMoney.text = format.formatInt(so: event.spent ?? 0)
     }
 }
