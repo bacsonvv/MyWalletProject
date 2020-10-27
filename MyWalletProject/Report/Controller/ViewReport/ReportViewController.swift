@@ -16,6 +16,7 @@ class ReportViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var txtDatePicker: UITextField!
+    
     var months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
     var currentMonth = 0
     var currentYear = 0
@@ -38,7 +39,6 @@ class ReportViewController: UIViewController {
         setupTxtDate()
         showDatePicker()
         createDatePicker()
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -59,6 +59,7 @@ class ReportViewController: UIViewController {
     func setupDelegate(presenter: ReportPresenter) {
         self.presenter = presenter
     }
+    
     //MARK: - Setup Date
     func setupTxtDate() {
         txtDatePicker.tintColor = .clear

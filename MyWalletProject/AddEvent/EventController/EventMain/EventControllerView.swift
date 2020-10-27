@@ -19,7 +19,6 @@ class EventControllerView: UIViewController {
     var arrNameEvent = [String]()
     var currenScore: Int!
     var currenKey: String!
-   // let navication = UINavigationController()
     var arrEvent: [Event] = []{
         didSet{
             loadViewIndicator.stopAnimating()
@@ -31,6 +30,7 @@ class EventControllerView: UIViewController {
     //load view
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.navigationItem.largeTitleDisplayMode = .never
         let nib = UINib(nibName: "EventCell", bundle: nil)
         eventTable.register(nib, forCellReuseIdentifier: "EventCell")
@@ -38,9 +38,6 @@ class EventControllerView: UIViewController {
         eventTable.delegate = self
         eventTable.dataSource = self
         imgNoEvent.setImageColor(color: UIColor.colorFromHexString(hex: "776d8a"))
-    }
-    deinit {
-        print("vanthanhEventmain")
     }
     
     func setupSegmentTextColor() {
@@ -81,21 +78,26 @@ class EventControllerView: UIViewController {
         self.navigationController?.pushViewController(add, animated: true)
     }
 }
+
 extension EventControllerView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrEvent.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath) as! EventCell
         cell.load(event: arrEvent[indexPath.row])
         return cell
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 10
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detail = UIStoryboard.init(name: "AddEvent", bundle: nil).instantiateViewController(identifier: "DetailEvent")
             as! DetailEventController
@@ -116,6 +118,7 @@ extension EventControllerView: EventPresenterDelegate{
         }
     }
 }
+
 extension EventControllerView {
     override func viewWillAppear(_ animated: Bool) {
         sgm.selectedSegmentIndex = 0
@@ -125,7 +128,7 @@ extension EventControllerView {
     }
 }
 
-extension EventControllerView{
+extension EventControllerView {
     func acctivityIndicator()  {
         loadViewIndicator.startAnimating()
         loadViewIndicator.alpha = 1

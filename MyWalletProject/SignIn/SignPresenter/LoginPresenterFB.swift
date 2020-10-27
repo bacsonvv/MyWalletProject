@@ -42,7 +42,7 @@ class LoginFbPresenter {
                 if (error == nil){
                     let dict = result as! [String : AnyObject]
                     let picutreDic = dict as NSDictionary
-
+                    
                     if let idOfUser = picutreDic.object(forKey: "id") as? String,let nameOfUser = picutreDic.object(forKey: "name") as? String {
                         var tmpEmailAdd = ""
                         if let emailAddress = picutreDic.object(forKey: "email") {
@@ -63,7 +63,7 @@ class LoginFbPresenter {
                             controller.nextCategory(viewController: controller)
                         }
                     }
-         
+                    
                 }
             })
         }

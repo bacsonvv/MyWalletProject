@@ -9,7 +9,7 @@
 import UIKit
 
 class EventCell: UITableViewCell {
-
+    
     @IBOutlet weak var spent: UILabel!
     @IBOutlet weak var nameEvent: UILabel!
     @IBOutlet weak var lblDate: UILabel!
@@ -19,24 +19,21 @@ class EventCell: UITableViewCell {
     var format = FormatNumber()
     var checkDate = CheckDate()
     
-       
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-
+    
     func load(event: Event )  {
-        var so = event.spent!
-        imgCategory.image = UIImage(named: event.eventImage!)
+        var so = event.spent ?? 0
+        imgCategory.image = UIImage(named: event.eventImage ?? "")
         nameEvent.text = event.name
         lbSpent.text = format.formatInt(so: so)
         so = 0
-        lblDate.text = checkDate.stillDate(endDate: event.date!)
+        lblDate.text = checkDate.stillDate(endDate: event.date ?? "")
     }
-    
 }

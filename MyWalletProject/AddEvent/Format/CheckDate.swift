@@ -37,10 +37,9 @@ class CheckDate: NSObject {
         } else  {
             checkday1 = false
         }
-        return checkday1
         
+        return checkday1
     }
-    
     
     // Ngay con lai
     func stillDate(endDate: String) -> String {
@@ -60,6 +59,5 @@ class CheckDate: NSObject {
         } else {
             return "Finished"
         }
-       
     }
 }

@@ -21,16 +21,15 @@ class EventImgPresenter {
         self.eventUseCase = usecase
         self.eventUseCase?.delegate = self
     }
+    
     //Get data
     func fetchData1()  {
         eventUseCase?.fetchData()
     }
 }
+
 extension EventImgPresenter: EventImgUseCaseDelegate{
     func data( imgEvents: [String]) {
-        
         delegate?.getNumberOfEventImg(imgs: imgEvents)
     }
-    
-    
 }

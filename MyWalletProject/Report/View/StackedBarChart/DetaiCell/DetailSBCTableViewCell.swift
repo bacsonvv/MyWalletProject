@@ -81,6 +81,7 @@ class DetailSBCTableViewCell: BaseTBCell, ChartViewDelegate {
         chartView.data = data
     }
 }
+
 extension DetailSBCTableViewCell: IAxisValueFormatter {
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         return days[min(max(Int(value), 0), days.count - 1)]

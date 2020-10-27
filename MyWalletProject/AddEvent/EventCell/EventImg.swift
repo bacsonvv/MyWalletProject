@@ -9,19 +9,17 @@
 import UIKit
 
 class EventImg: UICollectionViewCell {
-
+    
     @IBOutlet weak var lblEvent: UILabel!
     @IBOutlet weak var imgEvent: UIImageView!
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
+    
     
     public func load(img: String)  {
-    imgEvent.image = UIImage(named: img)
+        imgEvent.image = UIImage(named: img)
     }
-    
 }

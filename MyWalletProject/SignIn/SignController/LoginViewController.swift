@@ -55,8 +55,6 @@ class LoginViewController: UIViewController {
         GIDSignIn.sharedInstance()?.delegate = self
         GIDSignIn.sharedInstance().signIn()
     }
-    
-    
 }
 
 extension LoginViewController:LoginViewControllerDelegate{
