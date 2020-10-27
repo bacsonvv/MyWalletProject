@@ -24,7 +24,6 @@ class BudgetCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
     }
     
     func setLayout(budget:Budget, spend:Int , language:String) {
@@ -34,10 +33,10 @@ class BudgetCell: UITableViewCell {
         lblStartDate.text = "\(BudgetListDataString.start.rawValue.addLocalizableString(str: language)): \(budget.startDate ?? "")"
         lblEndDate.text = "\(BudgetListDataString.end.rawValue.addLocalizableString(str: language)): \(budget.endDate ?? "")"
         prgFormCate.setProgress((Float(spend))/Float(budget.amount ?? 1), animated: true)
-        if(Float((Float(spend))/Float(budget.amount ?? 1)) > 1.0){
+        
+        if(Float((Float(spend))/Float(budget.amount ?? 1)) > 1.0) {
             prgFormCate.progressTintColor = UIColor.red
-        }
-        else{
+        } else {
             prgFormCate.progressTintColor = UIColor(displayP3Red: 0.0/255.0, green: 127.0/255.0, blue: 84.0/255.0, alpha: 1)
         }
     }

@@ -9,15 +9,15 @@
 import Foundation
 import Firebase
 
-protocol BudgetUseCaseDelegate : class {
-    func getNewChildID(id:Int)
-    func getListBudgetName(listBudgetName:[Budget])
-    func getListTransaction(listTransaction:[Transaction])
+protocol BudgetUseCaseDelegate: class {
+    func getNewChildID(id: Int)
+    func getListBudgetName(listBudgetName: [Budget])
+    func getListTransaction(listTransaction: [Transaction])
 }
 
 protocol BudgetAdd {
     func getnewChild()
-    func addBudgetDB(budget:Budget , id : Int)
+    func addBudgetDB(budget: Budget, id: Int)
 }
 
 protocol BudgetEdit {
@@ -25,12 +25,11 @@ protocol BudgetEdit {
 }
 
 class BudgetUseCase {
-    weak var delegate:BudgetUseCaseDelegate?
+    weak var delegate: BudgetUseCaseDelegate?
 }
 
 // MARK: - get list Budget
 extension BudgetUseCase {
-    
     func getListBudget() {
         var listBudgetName = [Budget]()
         Defined.ref.child(Path.budget.getPath()).observeSingleEvent(of: .value) { (data) in
@@ -49,7 +48,7 @@ extension BudgetUseCase {
         
     }
     
-    func getlistTrans(){
+    func getlistTrans() {
         var listTransaction = [Transaction]()
         
         // tạo luồng load cùng 1 nhóm
@@ -94,9 +93,9 @@ extension BudgetUseCase {
 }
 
 //MARK: - add budget
-extension BudgetUseCase : BudgetAdd{
+extension BudgetUseCase: BudgetAdd{
     // get new child id
-    func getnewChild(){
+    func getnewChild() {
         var newChild = 0
         Defined.ref.child(Path.budget.getPath()).observeSingleEvent(of: .value) {[weak self] (snapshot) in
             guard let self = self else {
@@ -106,10 +105,10 @@ extension BudgetUseCase : BudgetAdd{
                 if snapshots.count < 1{
                     newChild = 1
                 }
-                else{
+                else {
                     for snap in snapshots.reversed() {
                         let keyString = snap.key
-                        if let keyInt = Int(keyString){
+                        if let keyInt = Int(keyString) {
                             newChild = keyInt + 1
                         }
                         break;
@@ -124,41 +123,39 @@ extension BudgetUseCase : BudgetAdd{
     func addBudgetDB(budget: Budget, id: Int) {
         let budget = [
             "id" : id,
-            "categoryId" : budget.categoryId!,
-            "categoryName" : budget.categoryName!,
-            "categoryImage" : budget.categoryImage!,
-            "transactionType" : budget.transactionType!,
-            "amount" : budget.amount!,
-            "startDate" : budget.startDate!,
-            "endDate" : budget.endDate!
+            "categoryId" : budget.categoryId ?? "",
+            "categoryName" : budget.categoryName ?? "",
+            "categoryImage" : budget.categoryImage ?? "",
+            "transactionType" : budget.transactionType ?? "",
+            "amount" : budget.amount ?? 0,
+            "startDate" : budget.startDate ?? "",
+            "endDate" : budget.endDate ?? ""
             ] as [String : Any]
         
         Defined.ref.child(Path.budget.getPath()).child("\(id)").updateChildValues(budget,withCompletionBlock: { error , ref in
-            if error == nil {
-            }else{
-            }
-        } )
+            if error == nil {}
+            else{}
+        })
     }
 }
 
-extension BudgetUseCase : BudgetEdit {
+extension BudgetUseCase: BudgetEdit {
     func editBudgetDB(budget: Budget) {
         let budget1 = [
-            "id" : budget.id!,
-            "categoryId" : budget.categoryId! ,
-            "categoryName" : budget.categoryName!,
-            "categoryImage" : budget.categoryImage!,
-            "transactionType" : budget.transactionType!,
-            "amount" : budget.amount!,
-            "startDate" : budget.startDate!,
-            "endDate" : budget.endDate!,
+            "id" : budget.id ?? 0,
+            "categoryId" : budget.categoryId ?? "",
+            "categoryName" : budget.categoryName ?? "",
+            "categoryImage" : budget.categoryImage ?? "",
+            "transactionType" : budget.transactionType ?? "",
+            "amount" : budget.amount ?? 0,
+            "startDate" : budget.startDate ?? "",
+            "endDate" : budget.endDate ?? ""
         ] as [String : Any]
         
-        Defined.ref.child(Path.budget.getPath()).child("\(budget.id!)").updateChildValues(budget1,withCompletionBlock: { error , ref in
-            if error == nil {
-            }else{
-            }
-        } )
+        Defined.ref.child(Path.budget.getPath()).child("\(budget.id ?? 0)").updateChildValues(budget1, withCompletionBlock: { error , ref in
+            if error == nil {}
+            else{}
+        })
     }
 }
 

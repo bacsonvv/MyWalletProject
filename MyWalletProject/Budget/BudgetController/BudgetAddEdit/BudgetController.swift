@@ -27,19 +27,21 @@ class BudgetController: UIViewController {
     var ref = Database.database().reference()
     var type = ""
     var spend = 0
-    
     var language = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         presenter?.getListBudgetName()
         presenter?.getlistTransaction()
+        
         if type == BudgetAddEditDataString.addBudget.rawValue {
             presenter?.getNewId()
             navigationItem.title = type.addLocalizableString(str: language)
         } else if type == BudgetAddEditDataString.editBudget.rawValue {
             navigationItem.title = type.addLocalizableString(str: language)
         }
+        
         // table budget
         tblAddBudget.dataSource = self
         tblAddBudget.delegate = self
@@ -48,10 +50,12 @@ class BudgetController: UIViewController {
         tblAddBudget.register(UINib(nibName: "TimeCell", bundle: nil), forCellReuseIdentifier: "TimeCell")
         tblAddBudget.reloadData()
         tblAddBudget.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tblAddBudget.bounds.width, height: 0))
+        
         // hiden keyboard when tap background table
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         tapGestureRecognizer.cancelsTouchesInView = false
         tblAddBudget.addGestureRecognizer(tapGestureRecognizer)
+        
         // Change language btn back and save
         btnBack.title = BudgetAddEditDataString.back.rawValue.addLocalizableString(str: language)
         btnSave.title = BudgetAddEditDataString.save.rawValue.addLocalizableString(str: language)
@@ -78,21 +82,19 @@ class BudgetController: UIViewController {
             if type == BudgetAddEditDataString.addBudget.rawValue {
                 if listBudgetName.count < 1 {
                     addBudget()
-                    
-                } else{
+                } else {
                     var checkExist = true
                     for budget in listBudgetName {
-                        if (budgetObject.categoryName == budget.categoryName){
-                            if (budgetObject.startDate == budget.startDate && budgetObject.endDate == budget.endDate){
+                        if (budgetObject.categoryName == budget.categoryName) {
+                            if (budgetObject.startDate == budget.startDate && budgetObject.endDate == budget.endDate) {
                                 checkExist = false
                             }
                         }
                     }
                     
-                    if (checkExist == false){
+                    if (checkExist == false) {
                         AlertUtil.showAlert(from: self, with: "", message: BudgetAddEditDataString.dialogWarningStartAndEndisCoexist.rawValue.addLocalizableString(str: language))
-                        
-                    }else {
+                    } else {
                         addBudget()
                     }
                 }
@@ -112,10 +114,10 @@ class BudgetController: UIViewController {
                     }
                 }
                 
-                if (checkExist == false){
+                if (checkExist == false) {
                     AlertUtil.showAlert(from: self, with: "", message: BudgetAddEditDataString.dialogWarningStartAndEndisCoexist.rawValue.addLocalizableString(str: language))
                     
-                }else {
+                } else {
                     editBudget()
                 }
             }
@@ -149,7 +151,7 @@ extension BudgetController: UITableViewDataSource , UITableViewDelegate {
                     cell.lblCateName.text = budgetObject.categoryName?.addLocalizableString(str: language) ?? ""
                     cell.lblCateName.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
                     
-                }else{
+                } else {
                     cell.lblCateName.text = BudgetAddEditDataString.selectCategory.rawValue.addLocalizableString(str: language)
                     cell.lblCateName.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
                 }
@@ -161,7 +163,7 @@ extension BudgetController: UITableViewDataSource , UITableViewDelegate {
                 if budgetObject.amount != nil {
                     cell.lblAmount.text = "\(budgetObject.amount!)"
                     
-                }else{
+                } else {
                     cell.lblAmount.text = ""
                 }
                 cell.delegate = self
@@ -173,7 +175,7 @@ extension BudgetController: UITableViewDataSource , UITableViewDelegate {
                     cell.lblTime.text = "\(budgetObject.startDate ?? "") - \(budgetObject.endDate ?? "")"
                     cell.lblTime.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
                     
-                }else{
+                } else {
                     cell.lblTime.text = BudgetAddEditDataString.selectTime.rawValue.addLocalizableString(str: language)
                     cell.lblTime.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
                 }
@@ -200,8 +202,7 @@ extension BudgetController: UITableViewDataSource , UITableViewDelegate {
             vc.language = language
             vc.delegateCategory = self
             self.navigationController?.pushViewController(vc, animated: true)
-        }
-        else if indexPath.row == 2 {
+        } else if indexPath.row == 2 {
             let vc = UIStoryboard.init(name: "budget", bundle: nil).instantiateViewController(withIdentifier: "TimeRangerViewController") as! TimeRangerViewController
             vc.type = type
             vc.budgetObject = budgetObject
@@ -251,7 +252,7 @@ extension BudgetController: AddEditBudgetControll {
 
 //MARK: - Get data cell Amount
 extension BudgetController: AmountCellDelegete {
-    func amoutDidChange(value: String) {
+    func amountDidChange(value: String) {
         budgetObject.amount = Int(value)
     }
 }

@@ -9,12 +9,12 @@
 import Foundation
 import Firebase
 
-protocol SelectCategoryBudgetUseCaseDelegate : class {
-    func getDataCate(listCateExpense:[Category], listCateIncome:[Category])
+protocol SelectCategoryBudgetUseCaseDelegate: class {
+    func getDataCate(listCateExpense: [Category], listCateIncome: [Category])
 }
 
 class SelectCategoryBudgetUseCase {
-    weak var delegate : SelectCategoryBudgetUseCaseDelegate?
+    weak var delegate: SelectCategoryBudgetUseCaseDelegate?
 }
 
 extension SelectCategoryBudgetUseCase {

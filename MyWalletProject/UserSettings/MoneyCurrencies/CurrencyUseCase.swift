@@ -43,16 +43,16 @@ extension CurrencyUseCase {
     func exchangeVNDToOtherCurrencies(_ amount: Double) {
         var result: ResultData = ResultData(USD: 0.0, EUR: 0.0, JPY: 0.0, KRW: 0.0, CNY: 0.0, SGD: 0.0, AUD: 0.0, CAD: 0.0)
         
-        result.USD = (amount / Double(self.rateData?.rates.VND ?? "")!)
+        result.USD = (amount / (Double(self.rateData?.rates.VND ?? "") ?? 0.0))
         result.USD = result.USD.roundTo(places: 2)
         
-        result.EUR = exchangeMiddleware(sourceRate: result.USD, exchangeRate: Double(self.rateData?.rates.EUR ?? "")!)
-        result.JPY = exchangeMiddleware(sourceRate: result.USD, exchangeRate: Double(self.rateData?.rates.JPY ?? "")!)
-        result.KRW = exchangeMiddleware(sourceRate: result.USD, exchangeRate: Double(self.rateData?.rates.KRW ?? "")!)
-        result.CNY = exchangeMiddleware(sourceRate: result.USD, exchangeRate: Double(self.rateData?.rates.CNY ?? "")!)
-        result.SGD = exchangeMiddleware(sourceRate: result.USD, exchangeRate: Double(self.rateData?.rates.SGD ?? "")!)
-        result.AUD = exchangeMiddleware(sourceRate: result.USD, exchangeRate: Double(self.rateData?.rates.AUD ?? "")!)
-        result.CAD = exchangeMiddleware(sourceRate: result.USD, exchangeRate: Double(self.rateData?.rates.CAD ?? "")!)
+        result.EUR = exchangeMiddleware(sourceRate: result.USD, exchangeRate: Double(self.rateData?.rates.EUR ?? "") ?? 0.0)
+        result.JPY = exchangeMiddleware(sourceRate: result.USD, exchangeRate: Double(self.rateData?.rates.JPY ?? "") ?? 0.0)
+        result.KRW = exchangeMiddleware(sourceRate: result.USD, exchangeRate: Double(self.rateData?.rates.KRW ?? "") ?? 0.0)
+        result.CNY = exchangeMiddleware(sourceRate: result.USD, exchangeRate: Double(self.rateData?.rates.CNY ?? "") ?? 0.0)
+        result.SGD = exchangeMiddleware(sourceRate: result.USD, exchangeRate: Double(self.rateData?.rates.SGD ?? "") ?? 0.0)
+        result.AUD = exchangeMiddleware(sourceRate: result.USD, exchangeRate: Double(self.rateData?.rates.AUD ?? "") ?? 0.0)
+        result.CAD = exchangeMiddleware(sourceRate: result.USD, exchangeRate: Double(self.rateData?.rates.CAD ?? "") ?? 0.0)
         
         delegate?.responseData(resultModel: result)
     }

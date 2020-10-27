@@ -18,7 +18,6 @@ class BudgetListUseCase {
 }
 
 extension BudgetListUseCase {
-    
     //MARK: get data Firebase Budget and Transaction
     func getDataBudget() {
         let time = Date()

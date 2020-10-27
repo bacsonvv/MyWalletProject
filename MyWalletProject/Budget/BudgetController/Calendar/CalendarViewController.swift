@@ -21,11 +21,11 @@ class CalendarViewController: UIViewController, FSCalendarDelegate {
     var key = ""
     var budgetObject:Budget = Budget()
     var delegateCalendar:CalendarViewControllerDelegate?
-    
     var language = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         btnBack.title = TimeRangerDataString.back.rawValue.addLocalizableString(str: language)
         navigationItem.title = TimeRangerDataString.calendar.rawValue.addLocalizableString(str: language)
         viewCalendar.delegate = self
@@ -35,11 +35,12 @@ class CalendarViewController: UIViewController, FSCalendarDelegate {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/YYYY"
         let dateFormat = formatter.string(from: date)
-        if key == TimeRangerDataString.start.rawValue{
+        if key == TimeRangerDataString.start.rawValue {
             budgetObject.startDate = dateFormat
-        } else if key == TimeRangerDataString.end.rawValue{
+        } else if key == TimeRangerDataString.end.rawValue {
             budgetObject.endDate = dateFormat
         }
+        
         delegateCalendar?.fetchDataCalendar(budget: budgetObject, type: type)
         self.navigationController?.popViewController(animated: true)
     }

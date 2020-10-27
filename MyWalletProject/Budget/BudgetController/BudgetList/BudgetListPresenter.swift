@@ -38,7 +38,7 @@ extension BudgetListPresenter{
         let end = formatter.date(from: budget.endDate ?? "")
         for transaction in listTransaction {
             if (budget.categoryName == transaction.categoryid) {
-                let date = formatter.date(from: transaction.date!)
+                let date = formatter.date(from: transaction.date ?? "")
                 if let start = start , let end = end , let date = date{
                     if date >= start && date < end {
                         amount += transaction.amount ?? 0
@@ -48,13 +48,11 @@ extension BudgetListPresenter{
         }
         delegate?.getAmount(amount: amount)
     }
-
 }
 
 extension BudgetListPresenter:BudgetListUseCaseDelegate {
     func getListBudget(budgetCurrents: [Budget], budgetFinishs: [Budget], transactions: [Transaction]) {
         delegate?.getDataListBudgetPresenter(budgetCurrents: budgetCurrents, budgetFinishs: budgetFinishs, transactions: transactions)
     }
-    
 }
 
