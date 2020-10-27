@@ -42,7 +42,7 @@ extension BudgetDetailPresenter{
         let end = formatter.date(from: budget.endDate ?? "")
         for transaction in listTransaction {
             if (budget.categoryName == transaction.categoryid) {
-                let date = formatter.date(from: transaction.date!)
+                let date = formatter.date(from: transaction.date ?? "")
                 if let start = start , let end = end , let date = date{
                     if date >= start && date < end {
                         amount += transaction.amount ?? 0

@@ -32,6 +32,7 @@ class BudgetListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         localizableListBudget()
         self.navigationItem.largeTitleDisplayMode = .never
         presenter?.getDataBudget()
@@ -101,26 +102,30 @@ extension BudgetListViewController : UITableViewDataSource , UITableViewDelegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.totalMoneyCurrent = 0
         self.totalMoneyFinish = 0
-        if segmentIndex == 0{
+        
+        if segmentIndex == 0 {
             self.totalMoneyFinish = 0
             for budget in self.listBudgetCurrent {
                 self.totalMoneyCurrent += budget.amount ?? 0
             }
-            if (self.listBudgetCurrent.count < 1){
+            
+            if (self.listBudgetCurrent.count < 1) {
                 self.imgNoneData.isHidden = false
                 self.lblTotalMoney.isHidden = true
             } else {
                 self.imgNoneData.isHidden = true
                 self.lblTotalMoney.isHidden = false
             }
+            
             self.lblTotalMoney.text = "\(BudgetListDataString.total.rawValue.addLocalizableString(str: language)): \(self.totalMoneyCurrent)"
+            
             return listBudgetCurrent.count
-        }
-        else{
+        } else {
             self.totalMoneyCurrent = 0
             for budget in self.listBudgetFinish {
                 self.totalMoneyFinish += budget.amount ?? 0
             }
+            
             if (self.listBudgetFinish.count < 1){
                 self.imgNoneData.isHidden = false
                 self.lblTotalMoney.isHidden = true
@@ -128,7 +133,9 @@ extension BudgetListViewController : UITableViewDataSource , UITableViewDelegate
                 self.imgNoneData.isHidden = true
                 self.lblTotalMoney.isHidden = false
             }
+            
             self.lblTotalMoney.text = "\(BudgetListDataString.total.rawValue.addLocalizableString(str: language)): \(self.totalMoneyFinish)"
+            
             return listBudgetFinish.count
         }
     }
@@ -140,6 +147,7 @@ extension BudgetListViewController : UITableViewDataSource , UITableViewDelegate
             cell.prgFormCate.layer.cornerRadius = cell.prgFormCate.bounds.height / 2
             cell.prgFormCate.layer.masksToBounds = true
         }
+        
         switch segmentIndex {
         case 0:
             presenter?.getAmountListTransaction(budget: listBudgetCurrent[indexPath.row], listTransaction: listTransaction)
@@ -148,6 +156,7 @@ extension BudgetListViewController : UITableViewDataSource , UITableViewDelegate
             presenter?.getAmountListTransaction(budget: listBudgetFinish[indexPath.row], listTransaction: listTransaction)
             cell.setLayout(budget: listBudgetFinish[indexPath.row], spend: amount, language: language)
         }
+        
         return cell
     }
     
@@ -158,7 +167,6 @@ extension BudgetListViewController : UITableViewDataSource , UITableViewDelegate
     
     // click cell table
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if let vc = RouterType.budgetDetail.getVc() as? BudgetDetailController {
             switch segmentIndex {
             case 0:
@@ -175,7 +183,6 @@ extension BudgetListViewController : UITableViewDataSource , UITableViewDelegate
 
 //MARK: - BudgetListPresenterDelegate
 extension BudgetListViewController : BudgetListPresenterDelegate{
-    
     func getDataListBudgetPresenter(budgetCurrents: [Budget], budgetFinishs: [Budget], transactions: [Transaction]) {
         self.listBudgetCurrent = budgetCurrents
         self.listBudgetFinish = budgetFinishs

@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 protocol SelectCategoryViewControllerDelegate {
-    func fetchDataCategory(budget:Budget,type:String)
+    func fetchDataCategory(budget: Budget, type: String)
 }
 
 class SelectCategoryViewController: UIViewController {
@@ -30,9 +30,11 @@ class SelectCategoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationItem.title = SelectCategoryDataString.selectCategory.rawValue.addLocalizableString(str: language)
         btnBack.title = SelectCategoryDataString.back.rawValue.addLocalizableString(str: language)
         presenter?.getCateDB()
+        
         // table category
         tblCategory.dataSource = self
         tblCategory.delegate = self
@@ -58,7 +60,6 @@ class SelectCategoryViewController: UIViewController {
     func setUp(presenter: SelectCategoryBudgetPresenter) {
         self.presenter = presenter
     }
-    
 }
 
 //MARK: - table datasource , delegate
@@ -93,7 +94,7 @@ extension SelectCategoryViewController : UITableViewDataSource , UITableViewDele
 }
 
 //MARK: - get and reload data table into SelectCategoryBudgetPresenterDelegate
-extension SelectCategoryViewController : SelectCategoryBudgetPresenterDelegate {
+extension SelectCategoryViewController: SelectCategoryBudgetPresenterDelegate {
     func getDataCate(listCateExpense: [Category], listCateIncome: [Category]) {
         self.listCateExpense = listCateExpense
         tblCategory.reloadData()

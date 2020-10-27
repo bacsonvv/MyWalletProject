@@ -10,16 +10,12 @@ import Foundation
 import Firebase
 
 class LoginUseCase {
-//    var ref = Database.database().reference()
-    
-    var loginController:LoginViewController = LoginViewController()
-
     //MARK: - Check account exist
-    func checkAccountExist(id : String , name :String , email : String){
+    func checkAccountExist(id : String , name :String , email : String) {
         Defined.ref.child("Account").observeSingleEvent(of: .value, with: { (snapshot) in
-            if snapshot.hasChild(id){
+            if snapshot.hasChild(id) {
                 return
-            } else{
+            } else {
                 let profile = [
                     "name" : name,
                     "email" : email,
@@ -27,10 +23,9 @@ class LoginUseCase {
                     ] as [String : Any]
                 
                 Defined.ref.child("Account").child(String(id)).child("information").setValue(profile,withCompletionBlock: { error , ref in
-                    if error == nil {
-                    }else{
-                    }
-                } )
+                    if error == nil {}
+                    else {}
+                })
             }
         })
     }

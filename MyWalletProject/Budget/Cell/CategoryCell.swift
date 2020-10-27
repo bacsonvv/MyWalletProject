@@ -20,14 +20,11 @@ class CategoryCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func loadContent(imgName:String , categoryName:String , language:String){
         imgCate.image = UIImage.init(named: imgName)
         lblCate.text = categoryName.addLocalizableString(str: language)
     }
-    
 }
 

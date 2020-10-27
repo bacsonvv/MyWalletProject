@@ -8,7 +8,7 @@
 
 import UIKit
 protocol AmountCellDelegete: class {
-    func amoutDidChange(value: String)
+    func amountDidChange(value: String)
 }
 
 class AmountCell: UITableViewCell {
@@ -19,21 +19,16 @@ class AmountCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        lblAmount.addTarget(self, action: #selector(aaaaa), for: .editingChanged)
+        lblAmount.addTarget(self, action: #selector(setAmount), for: .editingChanged)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    @IBAction func txtAmountChange(_ sender: UITextField) {
     }
     
-    @objc func aaaaa() {
+    @objc func setAmount() {
         if let value = lblAmount.text {
-            delegate?.amoutDidChange(value: value)
+            delegate?.amountDidChange(value: value)
         }
-        
     }
 }

@@ -28,18 +28,15 @@ class DetailBudgetCell: UITableViewCell {
     @IBOutlet weak var lblWarningGreen: UILabel!
     @IBOutlet weak var lblWarningRed: UILabel!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
     }
     
     func setDataBackground(cateImage:String , cateName:String , amount:Int , startdate:String , endDate:String , spend: Int , language:String) {
-        
         lblSpendTitle.text = BudgetDetailDataString.spend.rawValue.addLocalizableString(str: language)
         lblRestTitle.text = BudgetDetailDataString.left.rawValue.addLocalizableString(str: language)
         lblAmountTitle.text = BudgetDetailDataString.amount.rawValue.addLocalizableString(str: language)
@@ -56,10 +53,10 @@ class DetailBudgetCell: UITableViewCell {
         
         prgSpend.setProgress((Float(spend))/Float(amount), animated: true)
         
-        if(Float((Float(spend))/Float(amount)) > 1.0){
+        if(Float((Float(spend))/Float(amount)) > 1.0) {
             prgSpend.progressTintColor = UIColor.red
         }
-        else{
+        else {
             prgSpend.progressTintColor = UIColor(displayP3Red: 0.0/255.0, green: 127.0/255.0, blue: 84.0/255.0, alpha: 1)
         }
         
